@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第4天 - 6月30日 - 博乐：边境小城的丝路风情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            color: #8b4513;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(139,69,19,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            color: #2c3e50;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            color: #4facfe;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 2px;
+        }
+        
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .timeline-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+        
+        .timeline-table tr:hover td {
+            background-color: #f8f9ff;
+        }
+        
+        .timeline-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .highlight-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .highlight-section h3 {
+            color: #d63384;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .highlight-list li {
+            background: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #d63384;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .budget-section {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .budget-table th {
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .budget-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .budget-total {
+            background: #28a745 !important;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .tip-card h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .checklist {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .checklist h3 {
+            color: #20c997;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .checklist-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .close-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 10001;
+            min-width: 60px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .close-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+        }
+        
+        .close-btn:active {
+            transform: scale(0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-table {
+                font-size: 0.9em;
+            }
+            
+            .timeline-table th,
+            .timeline-table td {
+                padding: 10px 5px;
+            }
+            
+            .close-btn {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+                min-width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="close-btn" onclick="closeModal()">✕ 关闭</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🏛️ 第4天 - 6月30日</h1>
+            <div class="subtitle">博乐：边境小城的丝路风情</div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📅 基本信息</h3>
+                <p><strong>日期：</strong>2025年6月30日（周一）</p>
+                <p><strong>天气：</strong>晴（20°C - 32°C）</p>
+                <p><strong>主题：</strong>温泉告别 + 边境城市探索</p>
+            </div>
+            <div class="info-card">
+                <h3>🏨 住宿信息</h3>
+                <p><strong>住宿：</strong>博乐金橡瑞家酒店</p>
+                <p><strong>类型：</strong>四星级商务酒店</p>
+                <p><strong>位置：</strong>博乐市北京北路</p>
+            </div>
+            <div class="info-card">
+                <h3>💰 预算概览</h3>
+                <p><strong>总费用：</strong>¥790-1,520（两人）</p>
+                <p><strong>主要支出：</strong>住宿 + 购物 + 餐饮</p>
+                <p><strong>特色：</strong>边境文化体验</p>
+            </div>
+            <div class="info-card">
+                <h3>🎯 主要亮点</h3>
+                <p><strong>温泉：</strong>天泉最后体验</p>
+                <p><strong>购物：</strong>海西国际大巴扎</p>
+                <p><strong>文化：</strong>丝路边境风情</p>
+            </div>
+        </div>
+        
+        <div class="timeline-section">
+            <h2 class="section-title">⏰ 详细时间安排</h2>
+            <table class="timeline-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>活动</th>
+                        <th>地点</th>
+                        <th>费用</th>
+                        <th>距离/交通</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:00-10:00</td>
+                        <td>🌡️ 最后温泉+早餐</td>
+                        <td>天泉酒店</td>
+                        <td>¥80-120</td>
+                        <td>酒店内</td>
+                        <td>享受最后的温泉时光</td>
+                    </tr>
+                    <tr>
+                        <td>10:00-12:00</td>
+                        <td>🏔️ 天泉景区深度游</td>
+                        <td>山谷步道</td>
+                        <td>已含</td>
+                        <td>酒店步行约5-10分钟</td>
+                        <td>瀑布森林探索</td>
+                    </tr>
+                    <tr>
+                        <td>12:00-14:00</td>
+                        <td>🚗 前往博乐市</td>
+                        <td>G219国道</td>
+                        <td>¥80-120</td>
+                        <td>约114公里，1小时50分钟车程</td>
+                        <td>经过草原风光</td>
+                    </tr>
+                    <tr>
+                        <td>14:00-15:30</td>
+                        <td>🍜 博乐午餐+入住</td>
+                        <td>博乐金橡瑞家酒店</td>
+                        <td>¥80-150</td>
+                        <td>酒店内</td>
+                        <td>办理入住，休息调整</td>
+                    </tr>
+                    <tr>
+                        <td>15:30-17:00</td>
+                        <td>🏛️ 滨河公园游览</td>
+                        <td>博乐滨河公园</td>
+                        <td>免费</td>
+                        <td>酒店到公园约1.2公里/步行15分钟</td>
+                        <td>城市绿肺，休闲漫步</td>
+                    </tr>
+                    <tr>
+                        <td>17:00-18:30</td>
+                        <td>🛍️ 海西国际大巴扎</td>
+                        <td>海西国际大巴扎</td>
+                        <td>¥100-200</td>
+                        <td>公园到大巴扎约3公里/10分钟车程</td>
+                        <td>特产采购，文化体验</td>
+                    </tr>
+                    <tr>
+                        <td>18:30-20:00</td>
+                        <td>🍽️ 艾莱茵餐厅晚餐</td>
+                        <td>艾莱茵餐厅</td>
+                        <td>¥120-200</td>
+                        <td>大巴扎到餐厅约1.5公里/步行20分钟</td>
+                        <td>品尝当地美食</td>
+                    </tr>
+                    <tr>
+                        <td>21:00-22:30</td>
+                        <td>🌙 夜市文化体验</td>
+                        <td>博乐夜市</td>
+                        <td>¥50-150</td>
+                        <td>餐厅到夜市约1公里/步行15分钟</td>
+                        <td>感受夜生活</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="highlight-section">
+            <h3>🌟 今日重点体验</h3>
+            <ul class="highlight-list">
+                <li><strong>🌡️ 温泉告别：</strong>天泉景区的最后温泉体验</li>
+                <li><strong>🏔️ 瀑布森林：</strong>2小时深度探索自然奇观</li>
+                <li><strong>🚗 草原公路：</strong>114公里穿越草原的自驾体验</li>
+                <li><strong>🏛️ 城市绿洲：</strong>滨河公园的休闲时光</li>
+                <li><strong>🛍️ 文化购物：</strong>海西国际大巴扎的民族风情</li>
+            </ul>
+        </div>
+        
+        <div class="budget-section">
+            <h3>💰 详细费用预算</h3>
+            <table class="budget-table">
+                <thead>
+                    <tr>
+                        <th>项目</th>
+                        <th>费用范围</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>早餐+温泉</td>
+                        <td>¥80-120</td>
+                        <td>天泉酒店</td>
+                    </tr>
+                    <tr>
+                        <td>油费+过路费</td>
+                        <td>¥80-120</td>
+                        <td>往返约228公里</td>
+                    </tr>
+                    <tr>
+                        <td>午餐</td>
+                        <td>¥80-150</td>
+                        <td>金橡瑞家酒店</td>
+                    </tr>
+                    <tr>
+                        <td>住宿</td>
+                        <td>¥280-580</td>
+                        <td>博乐金橡瑞家酒店</td>
+                    </tr>
+                    <tr>
+                        <td>购物</td>
+                        <td>¥100-200</td>
+                        <td>大巴扎特产</td>
+                    </tr>
+                    <tr>
+                        <td>晚餐</td>
+                        <td>¥120-200</td>
+                        <td>艾莱茵餐厅</td>
+                    </tr>
+                    <tr>
+                        <td>夜市</td>
+                        <td>¥50-150</td>
+                        <td>小食、纪念品</td>
+                    </tr>
+                    <tr class="budget-total">
+                        <td><strong>总计</strong></td>
+                        <td><strong>¥790-1,520</strong></td>
+                        <td><strong>两人一天预算</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="tips-section">
+            <h3>⚠️ 重要注意事项</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🚗 交通注意</h4>
+                    <ul>
+                        <li>🏔️ 天泉到博乐路段有山路，注意安全驾驶</li>
+                        <li>🚦 博乐市区交通相对拥堵，预留充足时间</li>
+                        <li>🅿️ 酒店提供免费停车，但车位有限</li>
+                        <li>🛍️ 大巴扎周边停车位紧张，建议步行前往</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🛍️ 购物提示</h4>
+                    <ul>
+                        <li>💰 大巴扎商品价格可以适当砍价</li>
+                        <li>🥜 购买干果类食品注意保质期</li>
+                        <li>💎 贵重物品建议在正规商店购买</li>
+                        <li>🧾 保留购物小票，便于退换货</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>📱 实用提示</h4>
+                    <ul>
+                        <li>📶 博乐市区信号良好，网络畅通</li>
+                        <li>ℹ️ 酒店前台可提供旅游咨询服务</li>
+                        <li>🌙 夜市营业到较晚，注意安全</li>
+                        <li>💵 准备现金，部分小商贩不支持移动支付</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🍽️ 美食推荐</h4>
+                    <ul>
+                        <li>🥘 艾莱茵餐厅：烤全羊、抓饭、烤包子</li>
+                        <li>🥛 传统蒙古族奶茶，口感独特</li>
+                        <li>🛍️ 大巴扎特色：奶疙瘩、马肠子、酸奶</li>
+                        <li>🌙 夜市小食：烤串、馕饼、各种小吃</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="checklist">
+            <h3>📝 今日体验清单</h3>
+            <div class="checklist-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">享受天泉温泉的最后时光</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">深度探索天泉景区瀑布森林</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">体验114公里草原公路自驾</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">在滨河公园感受城市绿洲</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">海西国际大巴扎购买特产</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">品尝艾莱茵餐厅维族美食</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">体验博乐夜市的热闹氛围</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">感受边境小城的丝路风情</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>🌅 明日预告</h3>
+            <p>明天我们将从博乐市前往霍尔果斯口岸，再到薰衣草园，最后回到伊宁，边境风情与花海浪漫的完美结合！🌸🏛️</p>
+            <br>
+            <p><em>制作时间：2025年6月25日</em></p>
+            <p><em>您的专属旅行导游：Cursor 🗺️✨</em></p>
+        </div>
+    </div>
+    
+    <script>
+        // 关闭模态框函数
+        function closeModal() {
+            try {
+                if (window.parent && window.parent !== window) {
+                    var modalElement = window.parent.document.getElementById('htmlModal');
+                    if (modalElement) {
+                        window.parent.document.body.removeChild(modalElement);
+                    }
+                } else {
+                    window.close();
+                }
+            } catch (error) {
+                console.log('无法关闭模态框，请点击背景区域关闭');
+                alert('请点击页面背景区域关闭此窗口');
+            }
+        }
+        
+        // 监听ESC键
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // 添加交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.style.background = 'rgba(76, 175, 80, 0.1)';
+                        this.parentElement.style.borderLeft = '4px solid #4caf50';
+                    } else {
+                        this.parentElement.style.background = 'rgba(255, 255, 255, 0.9)';
+                        this.parentElement.style.borderLeft = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

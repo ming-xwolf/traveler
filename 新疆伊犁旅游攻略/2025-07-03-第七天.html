@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第7天 - 7月3日 - 伊宁→那拉提草原，到达休整日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            border-radius: 15px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            color: #00b894;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            border-radius: 2px;
+        }
+        
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-table th {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .timeline-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+        
+        .timeline-table tr:hover td {
+            background-color: #f8f9ff;
+        }
+        
+        .timeline-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .highlight-section {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+        }
+        
+        .highlight-section h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .highlight-list li {
+            background: rgba(255, 255, 255, 0.2);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #fdcb6e;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-list li:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .budget-section {
+            background: linear-gradient(135deg, #55efc4 0%, #81ecec 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .budget-table th {
+            background: #00b894;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .budget-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .budget-total {
+            background: #00cec9 !important;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, #fab1a0 0%, #e17055 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #e17055;
+        }
+        
+        .tip-card h4 {
+            color: #e17055;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .checklist {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .checklist h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .checklist-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .close-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #e17055;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(225, 112, 85, 0.4);
+            transition: all 0.3s ease;
+            z-index: 10001;
+            min-width: 60px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .close-btn:hover {
+            background: #d63031;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(225, 112, 85, 0.5);
+        }
+        
+        .close-btn:active {
+            transform: scale(0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-table {
+                font-size: 0.9em;
+            }
+            
+            .timeline-table th,
+            .timeline-table td {
+                padding: 10px 5px;
+            }
+            
+            .close-btn {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+                min-width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="close-btn" onclick="closeModal()">✕ 关闭</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🏔️ 第7天 - 7月3日</h1>
+            <div class="subtitle">伊宁→那拉提草原，到达休整日</div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📅 基本信息</h3>
+                <p><strong>日期：</strong>2025年7月3日（星期四）</p>
+                <p><strong>天气：</strong>晴转多云（18°C - 28°C）</p>
+                <p><strong>主题：</strong>长途转移 + 环境适应</p>
+            </div>
+            <div class="info-card">
+                <h3>🏨 住宿信息</h3>
+                <p><strong>住宿：</strong>那拉提丽呈酒店</p>
+                <p><strong>类型：</strong>草原景观房</p>
+                <p><strong>价格：</strong>¥450-600/晚</p>
+            </div>
+            <div class="info-card">
+                <h3>💰 预算概览</h3>
+                <p><strong>总费用：</strong>¥970-1380（两人）</p>
+                <p><strong>主要支出：</strong>交通 + 住宿</p>
+                <p><strong>特点：</strong>休整日，费用适中</p>
+            </div>
+            <div class="info-card">
+                <h3>🎯 今日策略</h3>
+                <p><strong>路线：</strong>伊宁→那拉提（250公里）</p>
+                <p><strong>重点：</strong>安全抵达 + 环境适应</p>
+                <p><strong>准备：</strong>明日深度游览</p>
+            </div>
+        </div>
+        
+        <div class="timeline-section">
+            <h2 class="section-title">⏰ 详细时间安排</h2>
+            <table class="timeline-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>活动</th>
+                        <th>地点</th>
+                        <th>费用</th>
+                        <th>距离/交通</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:00-08:30</td>
+                        <td>🍳 早餐</td>
+                        <td>伊宁酒店</td>
+                        <td>¥30-50</td>
+                        <td>酒店内</td>
+                        <td>自助早餐，准备出发</td>
+                    </tr>
+                    <tr>
+                        <td>08:30-09:30</td>
+                        <td>🛒 购买必需品</td>
+                        <td>伊宁市区</td>
+                        <td>¥90-130</td>
+                        <td>酒店周边500米</td>
+                        <td>补充零食、水、防晒用品</td>
+                    </tr>
+                    <tr>
+                        <td>09:30-12:30</td>
+                        <td>🚗 前往那拉提</td>
+                        <td>伊墩高速+墩那高速</td>
+                        <td>¥120-180</td>
+                        <td>250公里，3小时</td>
+                        <td>高速路况良好，注意休息</td>
+                    </tr>
+                    <tr>
+                        <td>12:30-14:00</td>
+                        <td>🍖 草原午餐</td>
+                        <td>那拉提镇餐厅</td>
+                        <td>¥100-150</td>
+                        <td>高速出口到镇区3公里</td>
+                        <td>品尝当地美食，补充体力</td>
+                    </tr>
+                    <tr>
+                        <td>14:00-15:00</td>
+                        <td>🏨 酒店入住</td>
+                        <td>那拉提丽呈酒店</td>
+                        <td>¥450-600</td>
+                        <td>镇区到酒店1公里</td>
+                        <td>办理入住，房间休息</td>
+                    </tr>
+                    <tr>
+                        <td>15:00-17:00</td>
+                        <td>😴 午休调整</td>
+                        <td>酒店房间</td>
+                        <td>¥0</td>
+                        <td>酒店内</td>
+                        <td>适应高原环境，恢复体力</td>
+                    </tr>
+                    <tr>
+                        <td>17:00-18:30</td>
+                        <td>🚶 酒店周边漫步</td>
+                        <td>那拉提镇区</td>
+                        <td>¥0-30</td>
+                        <td>酒店步行范围1公里</td>
+                        <td>熟悉环境，轻松散步</td>
+                    </tr>
+                    <tr>
+                        <td>18:30-20:00</td>
+                        <td>🍽️ 草原晚餐</td>
+                        <td>丽呈酒店餐厅</td>
+                        <td>¥150-220</td>
+                        <td>酒店内</td>
+                        <td>哈萨克族特色菜，早点休息</td>
+                    </tr>
+                    <tr>
+                        <td>20:00-21:00</td>
+                        <td>🌃 酒店休闲</td>
+                        <td>酒店大堂/阳台</td>
+                        <td>¥0</td>
+                        <td>酒店内</td>
+                        <td>观赏草原夜景，准备明日行程</td>
+                    </tr>
+                    <tr>
+                        <td>21:00-22:00</td>
+                        <td>🛁 早休准备</td>
+                        <td>酒店房间</td>
+                        <td>¥0</td>
+                        <td>酒店内</td>
+                        <td>洗漱休息，为明日早起做准备</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="highlight-section">
+            <h3>🌟 今日重点活动</h3>
+            <ul class="highlight-list">
+                <li><strong>🚗 高速穿越：</strong>250公里高速公路的壮美风光体验</li>
+                <li><strong>🏨 草原入住：</strong>体验哈萨克族风情的度假酒店</li>
+                <li><strong>🚶 小镇漫步：</strong>感受那拉提草原小镇的宁静氛围</li>
+                <li><strong>😴 高原适应：</strong>海拔1800米环境适应，为明日做准备</li>
+                <li><strong>🌃 草原夜景：</strong>在酒店阳台观赏草原星空美景</li>
+            </ul>
+        </div>
+        
+        <div class="budget-section">
+            <h3>💰 详细费用预算</h3>
+            <table class="budget-table">
+                <thead>
+                    <tr>
+                        <th>项目类别</th>
+                        <th>具体项目</th>
+                        <th>预算金额</th>
+                        <th>备注说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>餐饮费用</td>
+                        <td>早餐+午餐+晚餐</td>
+                        <td>¥280-420</td>
+                        <td>包含特色哈萨克族美食</td>
+                    </tr>
+                    <tr>
+                        <td>交通费用</td>
+                        <td>油费+过路费</td>
+                        <td>¥120-180</td>
+                        <td>往返约500公里</td>
+                    </tr>
+                    <tr>
+                        <td>住宿费用</td>
+                        <td>那拉提丽呈酒店</td>
+                        <td>¥450-600</td>
+                        <td>草原景观房，含早餐</td>
+                    </tr>
+                    <tr>
+                        <td>购物费用</td>
+                        <td>防晒用品+零食</td>
+                        <td>¥90-130</td>
+                        <td>高原必需品补充</td>
+                    </tr>
+                    <tr>
+                        <td>其他费用</td>
+                        <td>小食+饮料等</td>
+                        <td>¥30-50</td>
+                        <td>机动费用</td>
+                    </tr>
+                    <tr class="budget-total">
+                        <td><strong>总计</strong></td>
+                        <td><strong>两人一天费用</strong></td>
+                        <td><strong>¥970-1380</strong></td>
+                        <td><strong>休整日适中预算</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="tips-section">
+            <h3>⚠️ 重要注意事项</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🚗 交通安全</h4>
+                    <p><strong>长途驾驶：</strong>250公里高速路段，需要注意安全</p>
+                    <ul>
+                        <li>🛣️ 每2小时休息一次，避免疲劳驾驶</li>
+                        <li>⛽ 出发前检查车辆状况，确保油量充足</li>
+                        <li>📱 提前下载离线地图，山区信号较弱</li>
+                        <li>💰 准备现金，部分区域不支持移动支付</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🌡️ 高原适应</h4>
+                    <p><strong>海拔变化：</strong>那拉提海拔1800米，需要适应</p>
+                    <ul>
+                        <li>💧 多喝水，少量多次，避免脱水</li>
+                        <li>🚶‍♂️ 避免剧烈运动，以休息为主</li>
+                        <li>😴 保持充足睡眠，为明日做准备</li>
+                        <li>🏥 如有不适及时告知酒店前台</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🏨 住宿准备</h4>
+                    <p><strong>酒店服务：</strong>充分利用酒店设施和服务</p>
+                    <ul>
+                        <li>🚌 与前台确认明日景区班车时间</li>
+                        <li>🎒 准备明日游览装备（保暖衣物、相机）</li>
+                        <li>⏰ 设置早起闹钟，明日观日出需早起</li>
+                        <li>📞 了解酒店叫醒服务和其他便民服务</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🌟 明日准备</h4>
+                    <p><strong>深度游览：</strong>为明日那拉提深度游做好准备</p>
+                    <ul>
+                        <li>🌅 早起时间：05:30（观日出）</li>
+                        <li>🧥 装备准备：保暖衣物、防晒用品</li>
+                        <li>🔋 充电宝、相机电池充满电</li>
+                        <li>💪 调整心态，迎接草原深度体验</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="checklist">
+            <h3>✅ 今日行程检查清单</h3>
+            <div class="checklist-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="breakfast">
+                    <label for="breakfast">🍳 酒店早餐完成</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="shopping">
+                    <label for="shopping">🛒 必需品采购完成</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="driving">
+                    <label for="driving">🚗 安全抵达那拉提</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="lunch">
+                    <label for="lunch">🍖 草原午餐体验</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="checkin">
+                    <label for="checkin">🏨 酒店入住完成</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="rest">
+                    <label for="rest">😴 午休调整完成</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="walk">
+                    <label for="walk">🚶 镇区漫步体验</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="dinner">
+                    <label for="dinner">🍽️ 特色晚餐享用</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="relax">
+                    <label for="relax">🌃 草原夜景观赏</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="prepare">
+                    <label for="prepare">🛁 明日准备完成</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>🌟 今日亮点回顾</h3>
+            <p>✨ 高速穿越壮美风光 | 🏨 草原酒店入住体验 | 🚶 小镇宁静漫步 | 😴 高原环境适应 | 🌃 草原星空观赏</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                明日预告：那拉提国家森林公园深度游览，日出、空中草原、河谷探索、牧民文化体验 🌅🌿
+            </p>
+            <p style="margin-top: 10px; font-size: 0.8em;">
+                制作时间：2025年7月3日 | 您的专属旅行导游：Cursor 🗺️✨
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            if (window.parent && window.parent.closeHTMLModal) {
+                window.parent.closeHTMLModal();
+            } else {
+                window.close();
+            }
+        }
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // 点击背景关闭模态框（如果需要）
+        document.addEventListener('click', function(event) {
+            if (event.target === document.body) {
+                closeModal();
+            }
+        });
+
+        // 复选框交互效果
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const label = this.nextElementSibling;
+                if (this.checked) {
+                    label.style.textDecoration = 'line-through';
+                    label.style.opacity = '0.6';
+                } else {
+                    label.style.textDecoration = 'none';
+                    label.style.opacity = '1';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

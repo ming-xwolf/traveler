@@ -1,0 +1,97 @@
+# 操作系统生成的文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 编辑器和IDE配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vim/
+
+# 日志文件
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 依赖文件夹
+node_modules/
+bower_components/
+
+# 环境配置文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 构建产物
+dist/
+build/
+out/
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+*.temp
+
+# 备份文件
+*.bak
+*.backup
+*~
+.#*
+
+# Docker 相关临时文件
+.dockerignore.tmp
+
+# 压缩文件
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# 大型媒体文件（如果需要版本控制图片，可以注释掉这部分）
+# *.jpg
+# *.jpeg
+# *.png
+# *.gif
+# *.bmp
+# *.svg
+# *.ico
+# *.mp4
+# *.avi
+# *.mov
+
+# 个人笔记和草稿
+**/私人笔记.md
+**/草稿.md
+**/todo.md
+**/notes.txt
+
+# 测试文件
+test-output/
+coverage/
+.nyc_output/
+
+# 缓存文件
+.cache/
+.parcel-cache/
+
+# 自动生成的文件
+.auto-generated/
+
+# PDF和Word文档的临时文件
+~$*
+*.docx#
+*.pptx#
+*.xlsx# 

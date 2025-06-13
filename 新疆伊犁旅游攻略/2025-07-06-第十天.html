@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第10天 - 7月6日 - 那拉提→伊宁，休闲购物</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 15px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            color: #4facfe;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 2px;
+        }
+        
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .timeline-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+        
+        .timeline-table tr:hover td {
+            background-color: #f8f9ff;
+        }
+        
+        .timeline-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .highlight-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .highlight-section h3 {
+            color: #d63384;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .highlight-list li {
+            background: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #d63384;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .budget-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .budget-table th {
+            background: #20c997;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .budget-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .budget-total {
+            background: #28a745 !important;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .tip-card h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .checklist {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .checklist h3 {
+            color: #20c997;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .checklist-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .close-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 10001;
+            min-width: 60px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .close-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+        }
+        
+        .close-btn:active {
+            transform: scale(0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-table {
+                font-size: 0.9em;
+            }
+            
+            .timeline-table th,
+            .timeline-table td {
+                padding: 10px 5px;
+            }
+            
+            .close-btn {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+                min-width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="close-btn" onclick="closeModal()">✕ 关闭</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🛍️ 第10天 - 7月6日</h1>
+            <div class="subtitle">那拉提→伊宁，休闲购物</div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📅 基本信息</h3>
+                <p><strong>日期：</strong>2025年7月6日（星期日）</p>
+                <p><strong>天气：</strong>晴（20°C - 28°C）</p>
+                <p><strong>主题：</strong>返回伊宁、购物休闲、行程总结</p>
+            </div>
+            <div class="info-card">
+                <h3>🏨 住宿信息</h3>
+                <p><strong>住宿：</strong>伊宁伊犁宾馆</p>
+                <p><strong>类型：</strong>四星级商务酒店</p>
+                <p><strong>位置：</strong>伊宁市中心</p>
+            </div>
+            <div class="info-card">
+                <h3>💰 预算概览</h3>
+                <p><strong>总费用：</strong>¥800（两人）</p>
+                <p><strong>主要支出：</strong>购物 + 餐饮 + 住宿</p>
+                <p><strong>特色：</strong>休闲购物日</p>
+            </div>
+            <div class="info-card">
+                <h3>🎯 活动重点</h3>
+                <p><strong>购物：</strong>汇嘉时代购物中心</p>
+                <p><strong>特产：</strong>六星街巴扎</p>
+                <p><strong>观光：</strong>伊犁河大桥</p>
+            </div>
+        </div>
+        
+        <div class="timeline-section">
+            <h2 class="section-title">⏰ 详细时间安排</h2>
+            <table class="timeline-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>活动安排</th>
+                        <th>地点</th>
+                        <th>备注</th>
+                        <th>距离</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:00-09:00</td>
+                        <td>早餐，退房</td>
+                        <td>特克斯县城酒店</td>
+                        <td>打包行李，告别八卦城</td>
+                        <td>酒店内</td>
+                    </tr>
+                    <tr>
+                        <td>09:00-12:30</td>
+                        <td>驾车返回伊宁</td>
+                        <td>特克斯→伊宁</td>
+                        <td>约120公里，2.5小时</td>
+                        <td>距离：待查</td>
+                    </tr>
+                    <tr>
+                        <td>12:30-13:30</td>
+                        <td>入住酒店，午餐</td>
+                        <td>伊宁伊犁宾馆</td>
+                        <td>四星级酒店，休息调整</td>
+                        <td>距离：待查</td>
+                    </tr>
+                    <tr>
+                        <td>13:30-16:00</td>
+                        <td>购物中心</td>
+                        <td>汇嘉时代购物中心</td>
+                        <td>主要活动</td>
+                        <td>酒店到商场约3公里/10分钟车程</td>
+                    </tr>
+                    <tr>
+                        <td>16:00-17:30</td>
+                        <td>民族特产市场</td>
+                        <td>六星街巴扎</td>
+                        <td>特产采购</td>
+                        <td>商场到巴扎约2公里/步行25分钟</td>
+                    </tr>
+                    <tr>
+                        <td>17:30-19:00</td>
+                        <td>市区观光</td>
+                        <td>伊犁河大桥</td>
+                        <td>城市风光</td>
+                        <td>巴扎到大桥约3公里/10分钟车程</td>
+                    </tr>
+                    <tr>
+                        <td>19:00-20:30</td>
+                        <td>告别晚餐</td>
+                        <td>特色餐厅</td>
+                        <td>总结旅程</td>
+                        <td>大桥到餐厅约2公里/步行25分钟</td>
+                    </tr>
+                    <tr>
+                        <td>20:30-22:00</td>
+                        <td>酒店休息</td>
+                        <td>伊宁伊犁宾馆</td>
+                        <td>准备明日行程</td>
+                        <td>餐厅到酒店约1公里/步行15分钟</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="highlight-section">
+            <h3>🌟 今日重点活动</h3>
+            <ul class="highlight-list">
+                <li><strong>🛍️ 汇嘉时代购物中心：</strong>现代商场购买品牌服装、化妆品等</li>
+                <li><strong>🎁 六星街巴扎：</strong>传统集市采购民族工艺品和新疆特产</li>
+                <li><strong>🌉 伊犁河大桥：</strong>城市地标观光，欣赏河景和城市风光</li>
+                <li><strong>🍽️ 告别晚餐：</strong>品尝最后一餐新疆美食，总结旅程</li>
+                <li><strong>📦 特产采购：</strong>购买和田大枣、葡萄干、薰衣草精油等</li>
+            </ul>
+        </div>
+        
+        <div class="budget-section">
+            <h3>💰 详细费用预算</h3>
+            <table class="budget-table">
+                <thead>
+                    <tr>
+                        <th>项目</th>
+                        <th>预算金额</th>
+                        <th>实际花费</th>
+                        <th>节省/超支</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>交通费用</td>
+                        <td>¥100</td>
+                        <td>¥___</td>
+                        <td>¥___</td>
+                    </tr>
+                    <tr>
+                        <td>住宿费用</td>
+                        <td>¥400</td>
+                        <td>¥___</td>
+                        <td>¥___</td>
+                    </tr>
+                    <tr>
+                        <td>餐饮费用</td>
+                        <td>¥200</td>
+                        <td>¥___</td>
+                        <td>¥___</td>
+                    </tr>
+                    <tr>
+                        <td>购物费用</td>
+                        <td>¥500</td>
+                        <td>¥___</td>
+                        <td>¥___</td>
+                    </tr>
+                    <tr>
+                        <td>其他费用</td>
+                        <td>¥50</td>
+                        <td>¥___</td>
+                        <td>¥___</td>
+                    </tr>
+                    <tr class="budget-total">
+                        <td><strong>总计</strong></td>
+                        <td><strong>¥1,250</strong></td>
+                        <td><strong>¥___</strong></td>
+                        <td><strong>¥___</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="tips-section">
+            <h3>⚠️ 重要注意事项</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🛍️ 购物指南</h4>
+                    <ul>
+                        <li>💰 比价购买，同类商品价格差异大</li>
+                        <li>🔍 仔细检查包装、生产日期</li>
+                        <li>📄 选择正规商家，索要发票</li>
+                        <li>✈️ 了解航空托运限制</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🎁 特产选购</h4>
+                    <ul>
+                        <li>🍇 葡萄干：选择颗粒饱满，无破损</li>
+                        <li>🌹 和田大枣：色泽红润，大小均匀</li>
+                        <li>🥜 巴旦木：选择密封包装，保质期长</li>
+                        <li>💜 薰衣草精油：避光包装，正规厂家</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🏨 酒店服务</h4>
+                    <ul>
+                        <li>🧳 询问是否提供行李寄存服务</li>
+                        <li>🚗 确认免费停车位安排</li>
+                        <li>✈️ 预约明日接送机服务</li>
+                        <li>🕐 确认退房时间安排</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>📦 行李整理</h4>
+                    <ul>
+                        <li>🎁 特产分类包装，避免压坏</li>
+                        <li>⚖️ 注意行李重量限制</li>
+                        <li>🧴 液体物品符合航空规定</li>
+                        <li>📋 整理购物清单和发票</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="checklist">
+            <h3>📝 今日购物清单</h3>
+            <div class="checklist-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">和田大枣（30-80元/斤）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">新疆葡萄干（25-60元/斤）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">巴旦木（40-100元/斤）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">薰衣草精油（50-200元/瓶）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">伊犁蜂蜜（60-150元/瓶）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">英吉沙小刀（80-500元/把）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">和田玉饰品（200-5000元）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">民族工艺品纪念品</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>🌅 明日预告</h3>
+            <p>明天我们将告别美丽的新疆伊犁，返回大连，结束这次难忘的草原之旅！✈️🏠</p>
+            <br>
+            <p><em>制作时间：2025年6月25日</em></p>
+            <p><em>您的专属旅行导游：Cursor 🗺️✨</em></p>
+        </div>
+    </div>
+    
+    <script>
+        // 关闭模态框函数
+        function closeModal() {
+            try {
+                if (window.parent && window.parent !== window) {
+                    var modalElement = window.parent.document.getElementById('htmlModal');
+                    if (modalElement) {
+                        window.parent.document.body.removeChild(modalElement);
+                    }
+                } else {
+                    window.close();
+                }
+            } catch (error) {
+                console.log('无法关闭模态框，请点击背景区域关闭');
+                alert('请点击页面背景区域关闭此窗口');
+            }
+        }
+        
+        // 监听ESC键
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // 添加交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.style.background = 'rgba(76, 175, 80, 0.1)';
+                        this.parentElement.style.borderLeft = '4px solid #4caf50';
+                    } else {
+                        this.parentElement.style.background = 'rgba(255, 255, 255, 0.9)';
+                        this.parentElement.style.borderLeft = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

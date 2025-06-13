@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第3天 - 6月29日 - 天泉温泉：雪山下的温泉秘境</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 15px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            color: #8b4513;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .sunrise-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .sunrise-section h3 {
+            color: #d63384;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        
+        .timeline-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            color: #4facfe;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 2px;
+        }
+        
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .timeline-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+        
+        .timeline-table tr:hover td {
+            background-color: #f8f9ff;
+        }
+        
+        .timeline-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .highlight-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .highlight-section h3 {
+            color: #20c997;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .highlight-list li {
+            background: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #20c997;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .budget-section {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .budget-table th {
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .budget-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .budget-total {
+            background: #28a745 !important;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .tip-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .tip-card h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .checklist {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .checklist h3 {
+            color: #d63384;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .checklist-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .close-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 10001;
+            min-width: 60px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .close-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+        }
+        
+        .close-btn:active {
+            transform: scale(0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-table {
+                font-size: 0.9em;
+            }
+            
+            .timeline-table th,
+            .timeline-table td {
+                padding: 10px 5px;
+            }
+            
+            .close-btn {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+                min-width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="close-btn" onclick="closeModal()">✕ 关闭</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌅 第3天 - 6月29日</h1>
+            <div class="subtitle">天泉温泉：雪山下的温泉秘境</div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📅 基本信息</h3>
+                <p><strong>日期：</strong>2025年6月29日（周日）</p>
+                <p><strong>天气：</strong>多云转晴（18°C - 28°C）</p>
+                <p><strong>主题：</strong>日出观赏 + 温泉体验</p>
+            </div>
+            <div class="info-card">
+                <h3>🏨 住宿信息</h3>
+                <p><strong>住宿：</strong>天泉国际温泉度假酒店</p>
+                <p><strong>特色：</strong>天然温泉 + 雪山景观</p>
+                <p><strong>位置：</strong>温泉县天泉景区内</p>
+            </div>
+            <div class="info-card">
+                <h3>💰 预算概览</h3>
+                <p><strong>总费用：</strong>¥1,290-2,010（两人）</p>
+                <p><strong>主要支出：</strong>住宿 + 温泉体验</p>
+                <p><strong>特色：</strong>日出观赏 + 温泉放松</p>
+            </div>
+            <div class="info-card">
+                <h3>🎯 主要亮点</h3>
+                <p><strong>日出：</strong>赛里木湖绝美日出</p>
+                <p><strong>温泉：</strong>天然温泉疗养</p>
+                <p><strong>风景：</strong>雪山森林秘境</p>
+            </div>
+        </div>
+        
+        <div class="sunrise-section">
+            <h3>🌅 赛里木湖日出观赏攻略</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>⏰ 时间安排</h4>
+                    <ul>
+                        <li>05:30 起床洗漱（简单即可）</li>
+                        <li>06:00 出发前往观景台</li>
+                        <li>06:15 到达观景台，架设设备</li>
+                        <li>06:28 太阳升起，开始拍摄</li>
+                        <li>07:30 返回营地享用早餐</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>📍 最佳观景点</h4>
+                    <ul>
+                        <li>🎯 湖东岸观景台（推荐⭐⭐⭐⭐⭐）</li>
+                        <li>📍 距离营地约8公里，开车15分钟</li>
+                        <li>🌊 正东方向，日出正面观赏</li>
+                        <li>🅿️ 有停车场和观景平台</li>
+                        <li>📸 湖面倒影效果最佳</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🎒 必备物品</h4>
+                    <ul>
+                        <li>🧥 保暖衣物（晨间温度5-8°C）</li>
+                        <li>📷 摄影设备、三脚架、充电宝</li>
+                        <li>🔦 手电筒或头灯</li>
+                        <li>☕ 保温杯装热水或热茶</li>
+                        <li>👟 防滑鞋、毛毯</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>📸 摄影技巧</h4>
+                    <ul>
+                        <li>📊 ISO: 100-400（保证画质）</li>
+                        <li>🔍 光圈: f/8-f/11（保证景深）</li>
+                        <li>⚡ 使用三脚架稳定拍摄</li>
+                        <li>🎯 手动对焦到无穷远</li>
+                        <li>🖼️ 构图：前景湖面，中景远山</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline-section">
+            <h2 class="section-title">⏰ 详细时间安排</h2>
+            <table class="timeline-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>活动</th>
+                        <th>地点</th>
+                        <th>费用</th>
+                        <th>距离/交通</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>05:30-06:00</td>
+                        <td>🌅 起床+简单洗漱</td>
+                        <td>栖迟静海营地</td>
+                        <td>-</td>
+                        <td>住宿区内</td>
+                        <td>准备观日出，注意保暖</td>
+                    </tr>
+                    <tr>
+                        <td>06:00-06:15</td>
+                        <td>🚗 前往日出观景点</td>
+                        <td>湖东岸最佳观景台</td>
+                        <td>-</td>
+                        <td>营地开车15分钟/8公里</td>
+                        <td>抢占最佳观景位置</td>
+                    </tr>
+                    <tr>
+                        <td>06:15-07:30</td>
+                        <td>🌅 赛里木湖日出</td>
+                        <td>湖东观景台</td>
+                        <td>-</td>
+                        <td>观景台现场</td>
+                        <td>6月29日日出时间约06:28</td>
+                    </tr>
+                    <tr>
+                        <td>07:30-09:00</td>
+                        <td>🍳 返回营地早餐</td>
+                        <td>栖迟静海营地</td>
+                        <td>¥50-80</td>
+                        <td>观景台返回营地8公里</td>
+                        <td>湖景早餐，整理行李</td>
+                    </tr>
+                    <tr>
+                        <td>09:00-09:30</td>
+                        <td>🎒 退房+装车</td>
+                        <td>栖迟静海营地</td>
+                        <td>-</td>
+                        <td>住宿区内</td>
+                        <td>告别赛里木湖</td>
+                    </tr>
+                    <tr>
+                        <td>09:30-12:00</td>
+                        <td>🚗 前往天泉景区</td>
+                        <td>温泉县方向</td>
+                        <td>¥120-180</td>
+                        <td>约150公里，2.5小时车程</td>
+                        <td>经G30高速，山路景色优美</td>
+                    </tr>
+                    <tr>
+                        <td>12:00-13:30</td>
+                        <td>🍜 抵达午餐+入住</td>
+                        <td>天泉国际温泉度假酒店</td>
+                        <td>¥100-150</td>
+                        <td>酒店内</td>
+                        <td>办理入住，休息调整</td>
+                    </tr>
+                    <tr>
+                        <td>13:30-17:00</td>
+                        <td>🌡️ 温泉初体验</td>
+                        <td>酒店温泉区</td>
+                        <td>已含</td>
+                        <td>酒店内</td>
+                        <td>室内外温泉池放松</td>
+                    </tr>
+                    <tr>
+                        <td>17:00-18:30</td>
+                        <td>🏔️ 天泉景区游览</td>
+                        <td>景区步道</td>
+                        <td>¥20门票</td>
+                        <td>酒店步行5-10分钟</td>
+                        <td>瀑布森林自然风光</td>
+                    </tr>
+                    <tr>
+                        <td>18:30-20:00</td>
+                        <td>🍽️ 温泉养生晚餐</td>
+                        <td>酒店餐厅</td>
+                        <td>¥150-250</td>
+                        <td>酒店内</td>
+                        <td>特色养生菜品</td>
+                    </tr>
+                    <tr>
+                        <td>20:00-22:30</td>
+                        <td>🌙 夜间温泉浴</td>
+                        <td>户外温泉池</td>
+                        <td>已含</td>
+                        <td>酒店内</td>
+                        <td>星空下泡温泉</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="highlight-section">
+            <h3>🌟 今日重点体验</h3>
+            <ul class="highlight-list">
+                <li><strong>🌅 绝美日出：</strong>赛里木湖东岸观赏壮丽日出，湖面倒影如画</li>
+                <li><strong>🏔️ 日照金山：</strong>远山雪峰在晨光中呈现金色，震撼心灵</li>
+                <li><strong>🚗 山路风光：</strong>150公里穿越天山余脉的壮美景色</li>
+                <li><strong>🌡️ 温泉放松：</strong>早起观日出后，温泉放松恢复体力</li>
+                <li><strong>🌙 星空温泉：</strong>夜晚户外温泉的浪漫体验</li>
+            </ul>
+        </div>
+        
+        <div class="budget-section">
+            <h3>💰 详细费用预算</h3>
+            <table class="budget-table">
+                <thead>
+                    <tr>
+                        <th>项目</th>
+                        <th>费用范围</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>日出观景往返油费</td>
+                        <td>¥20-30</td>
+                        <td>往返16公里</td>
+                    </tr>
+                    <tr>
+                        <td>早餐</td>
+                        <td>¥50-80</td>
+                        <td>营地湖景早餐</td>
+                    </tr>
+                    <tr>
+                        <td>油费+过路费</td>
+                        <td>¥120-180</td>
+                        <td>往返约300公里</td>
+                    </tr>
+                    <tr>
+                        <td>天泉景区门票</td>
+                        <td>¥40</td>
+                        <td>¥20×2人，酒店客人优惠价</td>
+                    </tr>
+                    <tr>
+                        <td>午餐</td>
+                        <td>¥100-150</td>
+                        <td>酒店餐厅</td>
+                    </tr>
+                    <tr>
+                        <td>住宿</td>
+                        <td>¥580-780</td>
+                        <td>温泉套房推荐</td>
+                    </tr>
+                    <tr>
+                        <td>晚餐</td>
+                        <td>¥150-250</td>
+                        <td>温泉养生餐</td>
+                    </tr>
+                    <tr>
+                        <td>SPA体验</td>
+                        <td>¥200-400</td>
+                        <td>可选项目</td>
+                    </tr>
+                    <tr>
+                        <td>其他</td>
+                        <td>¥50-100</td>
+                        <td>纪念品等</td>
+                    </tr>
+                    <tr class="budget-total">
+                        <td><strong>总计</strong></td>
+                        <td><strong>¥1,290-2,010</strong></td>
+                        <td><strong>两人一天预算（含日出）</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="tips-section">
+            <h3>⚠️ 重要注意事项</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🌅 日出观赏注意事项</h4>
+                    <ul>
+                        <li>⏰ 05:30起床，确保06:00准时出发</li>
+                        <li>🧥 晨间温度5-8°C，必须穿厚外套</li>
+                        <li>🚗 清晨光线较暗，注意行车安全</li>
+                        <li>📍 06:15前到达，抢占最佳观景位置</li>
+                        <li>😴 早起观日出，中午可在酒店休息补觉</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🚗 交通安全</h4>
+                    <ul>
+                        <li>🌙 清晨天未亮，开启车灯谨慎驾驶</li>
+                        <li>🗺️ 提前熟悉去观景台的路线</li>
+                        <li>⛽ 确保油量充足，避免半路没油</li>
+                        <li>🔦 携带手电筒、充电宝等应急物品</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🌡️ 温泉体验</h4>
+                    <ul>
+                        <li>⏰ 日出后可能疲劳，温泉有助恢复体力</li>
+                        <li>💪 早起观日出后注意休息，避免过度疲劳</li>
+                        <li>💧 早起+温泉，需要及时补充水分</li>
+                        <li>🏥 有心脏病等疾病者谨慎泡温泉</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>📸 摄影建议</h4>
+                    <ul>
+                        <li>🌅 日出全过程延时摄影</li>
+                        <li>🏔️ 太阳从山峰升起的瞬间</li>
+                        <li>🌊 湖面金光闪闪的倒影</li>
+                        <li>👥 人物剪影与日出的组合</li>
+                        <li>🌫️ 晨雾缭绕的湖面景象</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="checklist">
+            <h3>📝 今日体验清单</h3>
+            <div class="checklist-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">05:30起床准备观日出</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">在湖东观景台拍摄赛里木湖绝美日出</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">体验日照金山的壮观景象</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">在营地享用湖景早餐</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">体验天然温泉的神奇功效</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">品尝温泉煮蛋的独特美味</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">徒步天泉景区的森林步道</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">在星空下体验户外温泉的浪漫</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>🌅 明日预告</h3>
+            <p>明天我们将从天泉温泉前往博乐市，从山区温泉到边境城市的文化体验！🏙️🛍️</p>
+            <br>
+            <p><em>制作时间：2025年6月25日</em></p>
+            <p><em>您的专属旅行导游：Cursor 🗺️✨</em></p>
+        </div>
+    </div>
+    
+    <script>
+        // 关闭模态框函数
+        function closeModal() {
+            try {
+                if (window.parent && window.parent !== window) {
+                    var modalElement = window.parent.document.getElementById('htmlModal');
+                    if (modalElement) {
+                        window.parent.document.body.removeChild(modalElement);
+                    }
+                } else {
+                    window.close();
+                }
+            } catch (error) {
+                console.log('无法关闭模态框，请点击背景区域关闭');
+                alert('请点击页面背景区域关闭此窗口');
+            }
+        }
+        
+        // 监听ESC键
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // 添加交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.style.background = 'rgba(76, 175, 80, 0.1)';
+                        this.parentElement.style.borderLeft = '4px solid #4caf50';
+                    } else {
+                        this.parentElement.style.background = 'rgba(255, 255, 255, 0.9)';
+                        this.parentElement.style.borderLeft = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

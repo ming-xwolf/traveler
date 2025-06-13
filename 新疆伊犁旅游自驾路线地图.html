@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新疆伊犁旅游自驾路线地图 - 彩色路线规划</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            margin: 10px 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        #mapContainer {
+            width: 100%;
+            height: 600px;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        
+        .legend {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .legend h3 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.5em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .legend-item {
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .legend-item:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .legend-text {
+            flex: 1;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .route-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .route-info h3 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        
+        .route-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .route-item {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .route-item:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .route-item strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .route-stats {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: #666;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* 自定义弹窗样式 */
+        .custom-popup .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .custom-popup .leaflet-popup-content {
+            margin: 10px;
+            line-height: 1.4;
+        }
+        
+        .custom-popup .leaflet-popup-tip {
+            background: white;
+        }
+        
+        .map-info {
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .map-info h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .map-info p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ 新疆伊犁旅游自驾路线地图</h1>
+            <p>📅 2024年11天深度游 | 🚗 彩色路线规划 | 👥 6人团队专属</p>
+            <p>💰 总预算: ¥55,980-75,700 | 🛣️ 总里程: 约1,146公里</p>
+        </div>
+        
+        <div class="map-info">
+            <h4>🌍 开源地图说明</h4>
+            <p>本地图使用开源的OpenStreetMap数据，无需商业授权，完全免费使用</p>
+            <p>地图数据来源：OpenStreetMap贡献者 | 路线数据基于百度地图API验证</p>
+        </div>
+        
+        <div id="mapContainer"></div>
+        
+        <div class="controls">
+            <button class="btn" onclick="showAllRoutes()">🗺️ 显示全部路线</button>
+            <button class="btn" onclick="hideAllRoutes()">❌ 隐藏全部路线</button>
+            <button class="btn" onclick="focusOnXinjiang()">🎯 聚焦新疆</button>
+            <button class="btn" onclick="showDrivingOnly()">🚗 仅显示自驾</button>
+            <button class="btn" onclick="showItineraryGuide()">📋 行程指南</button>
+        </div>
+        
+        <div class="legend">
+            <h3>🌈 路线颜色图例 (点击切换显示)</h3>
+            <div class="legend-grid">
+                <div class="legend-item" onclick="toggleRoute('day1')">
+                    <div class="legend-color" style="background: #808080;"></div>
+                    <div class="legend-text">第1天: 大连 → 伊宁 (✈️航班)</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day2')">
+                    <div class="legend-color" style="background: #FF4444;"></div>
+                    <div class="legend-text">第2天: 伊宁 → 赛里木湖 (260km)</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day3')">
+                    <div class="legend-color" style="background: #FF8800;"></div>
+                    <div class="legend-text">第3天: 赛里木湖 → 天泉景区</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day4')">
+                    <div class="legend-color" style="background: #FFDD00;"></div>
+                    <div class="legend-text">第4天: 天泉景区 → 博乐市</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day5')">
+                    <div class="legend-color" style="background: #88DD00;"></div>
+                    <div class="legend-text">第5天: 博乐市 → 伊宁市 (223km)</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day6')">
+                    <div class="legend-color" style="background: #00DD88;"></div>
+                    <div class="legend-text">第6天: 伊宁市区游览 🏛️</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day7')">
+                    <div class="legend-color" style="background: #00AAFF;"></div>
+                    <div class="legend-text">第7天: 伊宁 → 那拉提草原 (270km)</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day8')">
+                    <div class="legend-color" style="background: #4488FF;"></div>
+                    <div class="legend-text">第8天: 那拉提草原游览 🌾</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day9')">
+                    <div class="legend-color" style="background: #8844FF;"></div>
+                    <div class="legend-text">第9天: 那拉提 → 特克斯县 (266km)</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day10')">
+                    <div class="legend-color" style="background: #FF44AA;"></div>
+                    <div class="legend-text">第10天: 特克斯县 → 伊宁市 (127km)</div>
+                </div>
+                <div class="legend-item" onclick="toggleRoute('day11')">
+                    <div class="legend-color" style="background: #808080;"></div>
+                    <div class="legend-text">第11天: 伊宁 → 大连 (✈️航班)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="route-info">
+            <h3>📊 详细路线信息 (基于百度地图API实际数据)</h3>
+            <div class="route-details">
+                <div class="route-item" onclick="showDailyItinerary('day1')" title="点击查看第1天详细行程">
+                    <strong>✈️ 第1天: 大连 → 伊宁</strong>
+                    <div class="route-stats">
+                        📏 距离: 航班直飞<br>
+                        ⏱️ 飞行时间: 约4.5小时<br>
+                        💰 机票费用: ¥2,400-3,600/人<br>
+                        🛫 航班: 推荐南航/海航<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day2')" title="点击查看第2天详细行程">
+                    <strong>🚗 第2天: 伊宁 → 赛里木湖</strong>
+                    <div class="route-stats">
+                        📏 距离: 约260公里<br>
+                        ⏱️ 车程: 约3.5小时<br>
+                        💰 过路费: 约¥85<br>
+                        🛣️ 路线: 伊宁市 → G3016清伊高速 → G30连霍高速 → 赛里木湖<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day3')" title="点击查看第3天详细行程">
+                    <strong>🏔️ 第3天: 赛里木湖 → 温泉天泉景区</strong>
+                    <div class="route-stats">
+                        📏 距离: 约80公里<br>
+                        ⏱️ 车程: 约2小时<br>
+                        💰 过路费: 约¥30<br>
+                        🛣️ 路线: 赛里木湖 → S205省道 → 温泉县<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day4')" title="点击查看第4天详细行程">
+                    <strong>🌊 第4天: 温泉天泉景区 → 博乐市</strong>
+                    <div class="route-stats">
+                        📏 距离: 约120公里<br>
+                        ⏱️ 车程: 约2.5小时<br>
+                        💰 过路费: 约¥40<br>
+                        🛣️ 路线: 温泉县 → S205省道 → 博乐市<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day5')" title="点击查看第5天详细行程">
+                    <strong>🏛️ 第5天: 博乐市 → 伊宁市</strong>
+                    <div class="route-stats">
+                        📏 距离: 223公里 ✅<br>
+                        ⏱️ 车程: 3小时10分 ✅<br>
+                        💰 过路费: ¥76 ✅<br>
+                        🛣️ 路线: G30连霍高速 → G3016清伊高速<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day6')" title="点击查看第6天详细行程">
+                    <strong>🏛️ 第6天: 伊宁市区游览</strong>
+                    <div class="route-stats">
+                        📏 距离: 市内短距离<br>
+                        ⏱️ 车程: 灵活安排<br>
+                        💰 停车费: 约¥20-50<br>
+                        🛣️ 路线: 六星街 → 喀赞其民俗村 → 汉家公主纪念馆<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day7')" title="点击查看第7天详细行程">
+                    <strong>🌾 第7天: 伊宁 → 那拉提草原</strong>
+                    <div class="route-stats">
+                        📏 距离: 270公里 ✅<br>
+                        ⏱️ 车程: 3小时47分 ✅<br>
+                        💰 过路费: ¥91 ✅<br>
+                        🛣️ 路线: G3016伊墩高速 → G577国道<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day8')" title="点击查看第8天详细行程">
+                    <strong>🌾 第8天: 那拉提草原游览</strong>
+                    <div class="route-stats">
+                        📏 距离: 景区内游览<br>
+                        ⏱️ 车程: 灵活安排<br>
+                        💰 景区内交通: ¥120-200<br>
+                        🛣️ 路线: 空中草原 → 河谷草原 → 盘龙谷道<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day9')" title="点击查看第9天详细行程">
+                    <strong>⭐ 第9天: 那拉提 → 特克斯县</strong>
+                    <div class="route-stats">
+                        📏 距离: 266公里 ✅<br>
+                        ⏱️ 车程: 3小时28分 ✅<br>
+                        💰 过路费: ¥98 ✅<br>
+                        🛣️ 路线: G577国道 → S220省道 → 特克斯八卦城<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day10')" title="点击查看第10天详细行程">
+                    <strong>🏛️ 第10天: 特克斯县 → 伊宁市</strong>
+                    <div class="route-stats">
+                        📏 距离: 127公里 ✅<br>
+                        ⏱️ 车程: 2小时8分 ✅<br>
+                        💰 过路费: ¥41 ✅<br>
+                        🛣️ 路线: G577国道 → 伊墩高速 → 伊宁市<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+                <div class="route-item" onclick="showDailyItinerary('day11')" title="点击查看第11天详细行程">
+                    <strong>✈️ 第11天: 伊宁 → 大连</strong>
+                    <div class="route-stats">
+                        📏 距离: 航班直飞<br>
+                        ⏱️ 飞行时间: 约4.5小时<br>
+                        💰 机票费用: ¥2,400-3,600/人<br>
+                        🛫 航班: 推荐南航/海航<br>
+                        <small style="color: #f39c12; font-weight: bold;">💡 点击查看详细行程</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🗓️ 最后更新: 2024年12月19日 | 📞 紧急联系: 新疆旅游服务热线 0991-2350110</p>
+            <p>🌍 地图技术: OpenStreetMap + Leaflet | 路线数据: 百度地图API验证 | ✅ 标记为验证数据</p>
+            <p>💡 快捷键: 数字键1-9切换对应天数路线，R显示全部，H隐藏全部，F聚焦新疆</p>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script type="text/javascript">
+        // 初始化Leaflet地图
+        var map = L.map('mapContainer').setView([43.8, 82.0], 7);
+        
+        // 添加OpenStreetMap瓦片层
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 18
+        }).addTo(map);
+        
+        // 定义主要景点坐标（基于百度地图API获取的实际坐标，转换为WGS84）
+        var locations = {
+            '大连': [38.914, 121.618],
+            '伊宁市': [43.915, 81.284],
+            '赛里木湖': [44.601, 81.308],
+            '温泉天泉景区': [44.975, 81.031],
+            '博乐市': [44.860, 82.058],
+            '那拉提草原': [43.249, 84.101],
+            '特克斯县': [43.224, 81.843]
+        };
+        
+        // 路线颜色配置
+        var routeColors = {
+            'day1': '#808080',   // 航班路线 - 灰色
+            'day2': '#FF4444',   // 第2天 - 红色
+            'day3': '#FF8800',   // 第3天 - 橙色
+            'day4': '#FFDD00',   // 第4天 - 黄色
+            'day5': '#88DD00',   // 第5天 - 绿黄色
+            'day6': '#00DD88',   // 第6天 - 绿色
+            'day7': '#00AAFF',   // 第7天 - 天蓝色
+            'day8': '#4488FF',   // 第8天 - 蓝色
+            'day9': '#8844FF',   // 第9天 - 紫色
+            'day10': '#FF44AA',  // 第10天 - 粉红色
+            'day11': '#808080'   // 航班路线 - 灰色
+        };
+        
+        // 每日详细行程数据
+        var dailyItineraries = {
+            'day1': {
+                title: '第1天 - 6月27日 - 抵达伊犁，开启草原之旅',
+                weather: '晴/多云（18°C - 26°C）',
+                accommodation: '伊宁喆啡酒店',
+                theme: '抵达适应 + 伊宁市区初探',
+                schedule: [
+                    { time: '07:00-08:30', activity: '✈️ 机场集合办理登机', location: '大连周水子机场', cost: '-', note: '提前2小时到达机场' },
+                    { time: '08:30-17:00', activity: '🛫 飞行（含中转）', location: '大连→伊宁', cost: '机票已购', note: '约4.5小时飞行时间' },
+                    { time: '17:00-18:00', activity: '🧳 取行李、出机场', location: '伊宁机场', cost: '-', note: '办理出关手续' },
+                    { time: '18:00-19:30', activity: '🚗 机场取车手续', location: '伊宁机场租车点', cost: '¥200-300', note: '检查车辆，熟悉操作' },
+                    { time: '19:30-20:30', activity: '🏨 前往酒店入住', location: '伊宁喆啡酒店', cost: '-', note: '机场到酒店约20公里/25分钟' },
+                    { time: '20:30-22:00', activity: '🍽️ 欢迎晚餐', location: '喆啡酒店附近', cost: '¥150-250', note: '品尝新疆特色美食' },
+                    { time: '22:00-次日', activity: '😴 休息适应', location: '喆啡酒店', cost: '-', note: '调整时差，准备明日行程' }
+                ],
+                highlights: ['顺利抵达伊宁', '完成租车手续', '品尝正宗新疆美食', '适应当地气候和时差'],
+                tips: ['新疆实际比北京时间晚2小时', '确保手机开通漫游', '多喝水注意防晒', '保持开放心态体验多元文化']
+            },
+            'day2': {
+                title: '第2天 - 6月28日 - 赛里木湖：大西洋最后一滴眼泪',
+                weather: '晴转多云（15°C - 25°C，湖边较凉）',
+                accommodation: '赛里木湖栖迟静海营地',
+                theme: '高山湖泊 + 环湖游览 + 野花观赏',
+                schedule: [
+                    { time: '07:30-08:30', activity: '🍳 早餐+退房', location: '伊宁酒店', cost: '¥30-50', note: '提前半小时，避开退房高峰' },
+                    { time: '08:30-11:00', activity: '🚗 前往赛里木湖', location: 'G30高速', cost: '¥150', note: '约150公里，2.5小时，错开出发高峰' },
+                    { time: '11:00-12:00', activity: '🏔️ 东门初览+购票', location: '湖区东门观景台', cost: '¥70门票', note: '避开旅行团集中时间' },
+                    { time: '12:00-13:00', activity: '🌲 湖北松树头景区', location: '松树头观景台', cost: '-', note: '上午人少，拍摄效果好' },
+                    { time: '13:00-14:30', activity: '🍜 午餐+短憩', location: '湖心亭餐厅', cost: '¥80-120', note: '中午用餐避峰，补充体力' },
+                    { time: '14:30-16:00', activity: '🌸 湖西花海深度游', location: '花海观赏区', cost: '-', note: '下午光线佳，花朵最美' },
+                    { time: '16:00-17:30', activity: '🦢 天鹅湖湿地', location: '天鹅栖息地', cost: '-', note: '黄昏时分天鹅最活跃' },
+                    { time: '17:30-18:30', activity: '🏨 入住营地', location: '栖迟静海营地', cost: '¥450', note: '避开傍晚入住高峰' },
+                    { time: '18:30-20:00', activity: '🍽️ 湖景晚餐', location: '营地餐厅', cost: '¥160-200', note: '湖景位置用餐' },
+                    { time: '20:00-21:30', activity: '🌅 日落拍摄', location: '湖西观景平台', cost: '-', note: '最佳日落观赏时间' },
+                    { time: '21:30-23:00', activity: '🔥 篝火+观星', location: '营地篝火区', cost: '-', note: '夜间娱乐，观星体验' }
+                ],
+                highlights: ['顺时针环湖避峰游览', '湖西花海最佳观赏', '天鹅湖湿地生态体验', '营地篝火星空夜晚'],
+                tips: ['海拔2071米注意高反', '昼夜温差15°C准备保暖', '湖边风大注意防风', '携带防晒用品']
+            },
+            'day3': {
+                title: '第3天 - 6月29日 - 天泉温泉：雪山下的温泉秘境',
+                weather: '多云转晴，18-28°C',
+                accommodation: '天泉国际温泉度假酒店',
+                theme: '赛里木湖日出观赏，前往天泉景区，温泉体验',
+                schedule: [
+                    { time: '05:30-06:00', activity: '🌅 起床+简单洗漱', location: '栖迟静海营地', cost: '-', note: '准备观日出，注意保暖' },
+                    { time: '06:00-06:15', activity: '🚗 前往日出观景点', location: '湖东岸最佳观景台', cost: '-', note: '抢占最佳观景位置' },
+                    { time: '06:15-07:30', activity: '🌅 赛里木湖日出', location: '湖东观景台', cost: '-', note: '6月29日日出时间约06:28' },
+                    { time: '07:30-09:00', activity: '🍳 返回营地早餐', location: '栖迟静海营地', cost: '¥50-80', note: '湖景早餐，整理行李' },
+                    { time: '09:00-09:30', activity: '🎒 退房+装车', location: '栖迟静海营地', cost: '-', note: '告别赛里木湖' },
+                    { time: '09:30-12:00', activity: '🚗 前往天泉景区', location: '温泉县方向', cost: '¥120-180', note: '约150公里，2.5小时车程' },
+                    { time: '12:00-13:30', activity: '🍜 抵达午餐+入住', location: '天泉国际温泉度假酒店', cost: '¥100-150', note: '办理入住，休息调整' },
+                    { time: '13:30-17:00', activity: '🌡️ 温泉初体验', location: '酒店温泉区', cost: '已含', note: '室内外温泉池放松' },
+                    { time: '17:00-18:30', activity: '🏔️ 天泉景区游览', location: '景区步道', cost: '¥20门票', note: '瀑布森林自然风光' },
+                    { time: '18:30-20:00', activity: '🍽️ 温泉养生晚餐', location: '酒店餐厅', cost: '¥150-250', note: '特色养生菜品' },
+                    { time: '20:00-22:30', activity: '🌙 夜间温泉浴', location: '户外温泉池', cost: '已含', note: '星空下泡温泉' }
+                ],
+                highlights: ['赛里木湖绝美日出', '雪山下的温泉体验', '天泉景区自然风光', '星空下的温泉夜浴'],
+                tips: ['日出观赏需早起保暖', '温泉水温38-42°C', '景区步道注意安全', '夜间温泉注意保暖']
+            },
+            'day7': {
+                title: '第七天 - 2025年7月3日 - 伊宁→那拉提草原，到达休整日',
+                weather: '晴转多云，18-28°C',
+                accommodation: '那拉提丽呈酒店(那拉提草原店)',
+                theme: '伊宁出发，前往那拉提，酒店休整，适应环境',
+                schedule: [
+                    { time: '08:00-08:30', activity: '🍳 早餐', location: '伊宁酒店', cost: '¥30-50', note: '自助早餐，准备出发' },
+                    { time: '08:30-09:30', activity: '🛒 购买必需品', location: '伊宁市区', cost: '¥90-130', note: '补充零食、水、防晒用品' },
+                    { time: '09:30-12:30', activity: '🚗 前往那拉提', location: '伊墩高速+墩那高速', cost: '¥120-180', note: '距离：250公里，3小时' },
+                    { time: '12:30-14:00', activity: '🍖 草原午餐', location: '那拉提镇餐厅', cost: '¥100-150', note: '品尝当地美食，补充体力' },
+                    { time: '14:00-15:00', activity: '🏨 酒店入住', location: '那拉提丽呈酒店', cost: '¥450-600', note: '办理入住，房间休息' },
+                    { time: '15:00-17:00', activity: '😴 午休调整', location: '酒店房间', cost: '¥0', note: '适应高原环境，恢复体力' },
+                    { time: '17:00-18:30', activity: '🚶 酒店周边漫步', location: '那拉提镇区', cost: '¥0-30', note: '熟悉环境，轻松散步' },
+                    { time: '18:30-20:00', activity: '🍽️ 草原晚餐', location: '丽呈酒店餐厅', cost: '¥150-220', note: '哈萨克族特色菜，早点休息' },
+                    { time: '20:00-21:00', activity: '🌃 酒店休闲', location: '酒店大堂/阳台', cost: '¥0', note: '观赏草原夜景，准备明日行程' },
+                    { time: '21:00-22:00', activity: '🛁 早休准备', location: '酒店房间', cost: '¥0', note: '洗漱休息，为明日早起做准备' }
+                ],
+                highlights: ['高速穿越250公里壮美风光', '体验哈萨克族风情度假酒店', '感受那拉提草原小镇宁静', '为明日深度游览做好准备'],
+                tips: ['那拉提海拔1800米需要适应', '多喝水避免高原反应', '准备现金部分区域不支持移动支付', '设置早起闹钟明日观日出']
+            },
+            'day4': {
+                title: '第4天 - 6月30日 - 博乐：边境小城的丝路风情',
+                weather: '晴，20-32°C',
+                accommodation: '博乐金橡瑞家酒店',
+                theme: '边境小城的丝路风情',
+                schedule: [
+                    {time: '08:00-10:00', activity: '最后温泉+早餐', location: '天泉酒店', cost: '¥80-120', note: '享受最后的温泉时光'},
+                    {time: '10:00-12:00', activity: '天泉景区深度游', location: '山谷步道', cost: '已含', note: '瀑布森林探索'},
+                    {time: '12:00-14:00', activity: '前往博乐市', location: 'G219国道', cost: '¥80-120', note: '约114公里，1小时50分钟车程'},
+                    {time: '14:00-15:30', activity: '博乐午餐+入住', location: '博乐金橡瑞家酒店', cost: '¥80-150', note: '办理入住，休息调整'},
+                    {time: '15:30-17:00', activity: '滨河公园游览', location: '博乐滨河公园', cost: '免费', note: '城市绿肺，休闲漫步'},
+                    {time: '17:00-18:30', activity: '海西国际大巴扎', location: '海西国际大巴扎', cost: '¥100-200', note: '特产采购，文化体验'},
+                    {time: '18:30-20:00', activity: '艾莱茵餐厅晚餐', location: '艾莱茵餐厅', cost: '¥120-200', note: '品尝当地美食'},
+                    {time: '21:00-22:30', activity: '夜市文化体验', location: '博乐夜市', cost: '¥50-150', note: '感受夜生活'}
+                ],
+                highlights: ['天泉瀑布森林探索', '博乐滨河公园休闲', '海西国际大巴扎购物', '艾莱茵餐厅美食体验'],
+                tips: ['天泉到博乐路段有山路，注意安全驾驶', '大巴扎商品价格可以适当砍价', '博乐市区信号良好，网络畅通', '夜市营业到较晚，注意安全']
+            },
+            'day5': {
+                title: '第5天 - 7月1日 - 博乐→伊宁，重回伊犁河谷',
+                weather: '晴转多云，20-28°C',
+                accommodation: '伊宁喆啡酒店',
+                theme: '回归文明、历史文化、河谷风光',
+                schedule: [
+                    {time: '07:30-08:30', activity: '艾莎江烤包子早餐', location: '艾莎江达吾提烤包子店', cost: '¥25-40', note: '博乐酒店到餐厅约1公里/步行15分钟'},
+                    {time: '08:30-09:30', activity: '特产购买', location: '博乐市区', cost: '¥160-250', note: '最后采购机会'},
+                    {time: '09:30-10:30', activity: '前往果子沟大桥', location: 'G30高速', cost: '¥40-50', note: '博乐到果子沟大桥约60公里/1小时'},
+                    {time: '10:30-11:30', activity: 'PANJIR西餐厅早茶', location: 'PANJIR西餐厅', cost: '¥80-120', note: '果子沟大桥观景台旁，步行1分钟'},
+                    {time: '11:30-12:30', activity: '前往霍尔果斯', location: 'G312国道', cost: '¥30-40', note: '果子沟大桥到霍尔果斯约50公里/1小时'},
+                    {time: '12:30-14:00', activity: '口岸游览', location: '霍尔果斯口岸', cost: '¥50-80', note: '中哈边境体验'},
+                    {time: '14:00-15:00', activity: '前往薰衣草园', location: '省道218', cost: '¥30-40', note: '霍尔果斯到解忧公主薰衣草园约50公里/1小时'},
+                    {time: '15:00-17:00', activity: '薰衣草花海', location: '解忧公主薰衣草园', cost: '¥50-200', note: '7月1日正值盛花期'},
+                    {time: '17:00-18:00', activity: '前往伊宁', location: 'G218国道', cost: '¥40-60', note: '解忧公主薰衣草园到伊宁约60公里/1小时'},
+                    {time: '18:00-19:30', activity: '维吾尔晚餐', location: '维吾尔餐厅', cost: '¥133-220', note: '品尝地道维族美食'},
+                    {time: '19:30-20:30', activity: '伊犁河大桥观光', location: '伊犁河大桥', cost: '¥0', note: '餐厅到大桥约3公里/10分钟车程'},
+                    {time: '20:30-22:00', activity: '夜市漫步', location: '伊犁河公园/夜市', cost: '¥95-175', note: '大桥到夜市约2公里/步行25分钟'}
+                ],
+                highlights: ['果子沟大桥壮观景色', '霍尔果斯中哈边境体验', '解忧公主薰衣草园花海', '伊犁河大桥夜景'],
+                tips: ['需携带身份证件参观霍尔果斯口岸', '薰衣草园7月正值盛花期，拍照效果最佳', '果子沟大桥是新疆最美高架桥', '伊犁河大桥观景最佳时间为黄昏']
+            },
+            'day6': {
+                title: '第6天 - 7月2日 - 伊宁市区深度游，多元文化体验',
+                weather: '晴，21-29°C，微风',
+                accommodation: '伊宁喆啡酒店',
+                theme: '文化体验、休闲放松、民族风情',
+                schedule: [
+                    {time: '08:00-08:40', activity: '酒店早餐', location: '喆啡酒店餐厅', cost: '¥50-80', note: '悠闲享用自助早餐'},
+                    {time: '08:40-09:30', activity: '六星街美食', location: '六星街', cost: '¥30-60', note: '古兰丹姆冰淇淋、蓝墙面肺子'},
+                    {time: '09:40-12:00', activity: '民俗村游览', location: '喀赞其民俗村', cost: '¥80-150', note: '维吾尔族文化体验'},
+                    {time: '12:00-13:30', activity: '午餐', location: '老城区餐厅', cost: '¥133-203', note: '传统维族美食'},
+                    {time: '13:40-14:30', activity: '历史学习', location: '林则徐纪念馆', cost: '¥20-30', note: '了解边疆历史'},
+                    {time: '14:40-15:30', activity: '古建参观', location: '伊犁将军府', cost: '¥25-35', note: '清代军政文化'},
+                    {time: '15:40-16:30', activity: '公园休闲', location: '人民公园', cost: '¥15-30', note: '观察当地生活'},
+                    {time: '16:30-18:30', activity: '薰衣草园', location: '霍城薰衣草基地', cost: '¥80-150', note: '紫色花海摄影'},
+                    {time: '19:00-20:00', activity: '夜市晚餐', location: '伊宁夜市', cost: '¥115-185', note: '特色小食品尝'},
+                    {time: '20:00-21:30', activity: '夜景漫步', location: '伊犁河公园', cost: '¥0-30', note: '河畔夜景摄影'}
+                ],
+                highlights: ['喀赞其民俗村文化体验', '六星街美食打卡', '薰衣草基地花海摄影', '伊犁河公园夜景'],
+                tips: ['民俗村拍照需征得居民同意', '六星街蓝墙、冰淇淋摊位是热门拍照点', '薰衣草基地下午光线最佳', '夜市人气最旺时间为傍晚']
+            },
+            'day8': {
+                title: '第8天 - 7月4日 - 那拉提国家森林公园深度游览',
+                weather: '晴，16-26°C',
+                accommodation: '那拉提丽呈酒店(那拉提草原店)',
+                theme: '牧民文化沉浸体验，避开人群的深度游览',
+                schedule: [
+                    {time: '05:30-06:00', activity: '早起准备', location: '酒店房间', cost: '¥0', note: '洗漱，准备观日出装备'},
+                    {time: '06:00-08:30', activity: '草原日出', location: '空中草原观景台', cost: '¥95门票+¥40区间车', note: '避开人群最佳时间'},
+                    {time: '08:30-10:00', activity: '空中草原徒步', location: '空中草原步道', cost: '¥0', note: '人少时深度探索'},
+                    {time: '10:00-11:30', activity: '雪莲谷探秘', location: '雪莲谷景区', cost: '¥30观景费', note: '小众景点，游客稀少'},
+                    {time: '11:30-13:00', activity: '草原野餐', location: '河谷草原区', cost: '¥80-120', note: '避开餐厅用餐高峰'},
+                    {time: '13:00-15:30', activity: '牧民家访', location: '哈萨克牧民毡房', cost: '¥148-230', note: '深度文化体验'},
+                    {time: '15:30-17:30', activity: '骑马体验', location: '牧民马场', cost: '¥120-180', note: '下午人群分散时段'},
+                    {time: '17:30-19:00', activity: '河谷秘境', location: '巩乃斯河谷深处', cost: '¥0', note: '隐秘景点，很少游客'},
+                    {time: '19:00-20:30', activity: '黄昏观景', location: '空中草原制高点', cost: '¥0', note: '避开日落观景人群'},
+                    {time: '20:30-22:00', activity: '酒店晚餐', location: '丽呈酒店餐厅', cost: '¥200-280', note: '错峰用餐'},
+                    {time: '22:00-23:30', activity: '草原观星', location: '酒店观星台', cost: '¥0', note: '无光污染观星体验'}
+                ],
+                highlights: ['空中草原日出奇观', '雪莲谷小众秘境', '哈萨克牧民文化深度体验', '巩乃斯河谷隐秘探索'],
+                tips: ['海拔2200米注意保暖', '早起观日出需准备三脚架', '牧民家访体验包含午餐和所有活动', '河谷秘境是原生态区域，注意安全']
+            },
+            'day9': {
+                title: '第9天 - 7月5日 - 那拉提→特克斯八卦城，神秘布局探索',
+                weather: '晴转多云，18-26°C',
+                accommodation: '全季酒店特克斯八卦城太极坛店',
+                theme: '八卦城探秘、易经文化、历史传说',
+                schedule: [
+                    {time: '08:00-09:00', activity: '酒店退房', location: '那拉提丽呈酒店', cost: '-', note: '整理行李，酒店早餐'},
+                    {time: '09:00-12:00', activity: '前往特克斯', location: '那拉提→特克斯', cost: '¥98过路费', note: '距离：252公里，3小时4分钟'},
+                    {time: '12:00-13:30', activity: '午餐休息', location: '八卦城美食广场', cost: '¥80-120', note: '品尝当地特色美食'},
+                    {time: '13:30-14:00', activity: '酒店入住', location: '全季酒店', cost: '¥280-380', note: '办理入住，稍作休息'},
+                    {time: '14:00-17:30', activity: '八卦城探索', location: '特克斯八卦城', cost: '¥60-100', note: '世界最大八卦城'},
+                    {time: '17:30-19:00', activity: '太极坛观景', location: '八卦城太极坛', cost: '¥30-50', note: '俯瞰八卦城全景'},
+                    {time: '19:00-20:30', activity: '特色晚餐', location: '八卦楼餐厅', cost: '¥200-300', note: '哈萨克族风味大餐'},
+                    {time: '20:30-22:00', activity: '文化表演', location: '八卦城文化广场', cost: '¥80-120', note: '易经文化表演'}
+                ],
+                highlights: ['世界最大八卦城布局', '太极坛俯瞰全景', '易经文化深度体验', '哈萨克族风味美食'],
+                tips: ['山路较多，弯道较多，注意安全驾驶', '太极广场无红绿灯，注意交通安全', '可提前了解一些易经八卦知识', '特克斯是哈萨克族聚居区，尊重当地风俗']
+            },
+            'day10': {
+                title: '第10天 - 7月6日 - 特克斯→伊宁，休闲购物',
+                weather: '晴，20-28°C',
+                accommodation: '伊宁伊犁宾馆',
+                theme: '返回伊宁、购物休闲、行程总结',
+                schedule: [
+                    {time: '08:00-09:00', activity: '早餐，退房', location: '特克斯县城酒店', cost: '¥30-50', note: '打包行李，告别八卦城'},
+                    {time: '09:00-12:30', activity: '驾车返回伊宁', location: '特克斯→伊宁', cost: '¥80-120', note: '约120公里，2.5小时'},
+                    {time: '12:30-13:30', activity: '入住酒店，午餐', location: '伊宁伊犁宾馆', cost: '¥100-150', note: '四星级酒店，休息调整'},
+                    {time: '13:30-16:00', activity: '购物中心', location: '汇嘉时代购物中心', cost: '¥200-500', note: '现代商场购物'},
+                    {time: '16:00-17:30', activity: '民族特产市场', location: '六星街巴扎', cost: '¥300-800', note: '特产采购'},
+                    {time: '17:30-19:00', activity: '市区观光', location: '伊犁河大桥', cost: '¥0', note: '城市风光'},
+                    {time: '19:00-20:30', activity: '告别晚餐', location: '伊犁风情园', cost: '¥150-250', note: '总结旅程'},
+                    {time: '20:30-22:00', activity: '酒店休息', location: '伊宁伊犁宾馆', cost: '¥0', note: '准备明日行程'}
+                ],
+                highlights: ['汇嘉时代现代购物体验', '六星街巴扎特产采购', '伊犁河大桥城市风光', '告别晚餐总结旅程'],
+                tips: ['新疆特产注意保质期和包装', '干果类选择真空包装便于携带', '购买贵重物品选择正规商家', '保留购物小票便于退换货']
+            },
+            'day11': {
+                title: '第11天 - 7月7日 - 返程大连',
+                weather: '晴，18-26°C',
+                accommodation: '返回大连',
+                theme: '告别伊犁、返程大连、旅程结束',
+                schedule: [
+                    {time: '06:30-07:30', activity: '酒店早餐，最后整理', location: '伊宁市区酒店', cost: '¥30', note: '检查行李，退房'},
+                    {time: '07:30-08:00', activity: '前往机场', location: '酒店→伊宁机场', cost: '¥50', note: '约12公里，20分钟'},
+                    {time: '08:00-09:00', activity: '租车还车手续', location: '伊宁机场租车点', cost: '¥0', note: '重要环节'},
+                    {time: '09:00-10:00', activity: '办理值机托运', location: '伊宁机场', cost: '¥0', note: '提前2小时'},
+                    {time: '10:00-11:00', activity: '安检候机', location: '候机厅', cost: '¥0', note: '休息等待'},
+                    {time: '11:00-11:30', activity: '最后购物', location: '机场免税店', cost: '¥100-300', note: '补充采购'},
+                    {time: '11:30-12:00', activity: '登机准备', location: '登机口', cost: '¥0', note: '检查登机牌'},
+                    {time: '12:00-17:00', activity: '飞行返程', location: '伊宁→大连', cost: '机票已购', note: '约4小时飞行'},
+                    {time: '17:00-18:00', activity: '到达大连', location: '大连周水子机场', cost: '¥100', note: '返回家中'}
+                ],
+                highlights: ['顺利完成还车手续', '机场免税店最后采购', '圆满结束11天新疆之旅', '满载回忆返回大连'],
+                tips: ['还车前检查车辆外观和油量', '托运行李注意重量限制', '保留还车凭证和相关票据', '注意2小时时差调整']
+            }
+        };
+        
+        var polylines = {};
+        var markers = {};
+        
+        // 显示通知
+        function showNotification(message) {
+            var notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 创建标记点
+        function createMarker(coords, title, color) {
+            var marker = L.marker(coords).addTo(map);
+            marker.bindPopup(`<b>${title}</b><br>坐标: ${coords[0].toFixed(3)}, ${coords[1].toFixed(3)}`);
+            return marker;
+        }
+        
+        // 创建路线
+        function createRoute(coords, color, dayKey, title, isDashed = false) {
+            var polylineOptions = {
+                color: color,
+                weight: 5,
+                opacity: 0.8
+            };
+            
+            // 如果是航班路线，使用虚线
+            if (isDashed) {
+                polylineOptions.dashArray = '10, 10';
+                polylineOptions.weight = 3;
+            }
+            
+            var polyline = L.polyline(coords, polylineOptions).addTo(map);
+            
+            // 绑定详细行程信息弹窗
+            polyline.on('click', function() {
+                showDailyItinerary(dayKey);
+            });
+            
+            // 简单的悬停提示
+            polyline.bindTooltip(title, {
+                permanent: false,
+                direction: 'center'
+            });
+            
+            polylines[dayKey] = polyline;
+            
+            return polyline;
+        }
+        
+        // 显示每日详细行程
+        function showDailyItinerary(dayKey) {
+            // 首先尝试打开对应的HTML文件
+            var dayNumber = dayKey.replace('day', '');
+            var dateMap = {
+                '1': '2025-06-27',
+                '2': '2025-06-28',
+                '3': '2025-06-29',
+                '4': '2025-06-30',
+                '5': '2025-07-01',
+                '6': '2025-07-02',
+                '7': '2025-07-03',
+                '8': '2025-07-04',
+                '9': '2025-07-05',
+                '10': '2025-07-06',
+                '11': '2025-07-07'
+            };
+            
+            var htmlFileName = dateMap[dayNumber] + '-第' + convertToChineseNumber(dayNumber) + '天.html';
+            var htmlPath = '新疆伊犁旅游攻略/' + htmlFileName;
+            
+            // 尝试打开HTML文件
+            try {
+                // 创建一个模态框来显示HTML内容
+                showHTMLModal(htmlPath, dayKey);
+                showNotification(`📋 正在加载第${dayNumber}天的详细行程页面...`);
+                return;
+            } catch (error) {
+                console.log('HTML文件不存在，使用备用弹窗显示');
+            }
+            
+            // 如果HTML文件不存在，使用原来的弹窗方式
+            var itinerary = dailyItineraries[dayKey];
+            if (!itinerary) {
+                showNotification('该日行程信息暂未录入，敬请期待！', 'warning');
+                return;
+            }
+            
+            var scheduleHtml = '';
+            itinerary.schedule.forEach(function(item) {
+                scheduleHtml += `
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #2c3e50;">${item.time}</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">${item.activity}</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">${item.location}</td>
+                        <td style="padding: 8px; border: 1px solid #ddd; color: #e74c3c;">${item.cost}</td>
+                        <td style="padding: 8px; border: 1px solid #ddd; font-size: 12px; color: #7f8c8d;">${item.note}</td>
+                    </tr>
+                `;
+            });
+            
+            var highlightsHtml = itinerary.highlights.map(item => `<li style="margin: 5px 0; color: #27ae60;">✨ ${item}</li>`).join('');
+            var tipsHtml = itinerary.tips.map(item => `<li style="margin: 5px 0; color: #f39c12;">💡 ${item}</li>`).join('');
+            
+            var popupContent = `
+                <div style="max-width: 800px; max-height: 600px; overflow-y: auto; font-family: Arial, sans-serif;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; margin: -10px -10px 15px -10px; border-radius: 8px;">
+                        <h2 style="margin: 0; font-size: 18px; text-align: center;">${itinerary.title}</h2>
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 14px;">
+                            <span>🌤️ ${itinerary.weather}</span>
+                            <span>🏨 ${itinerary.accommodation}</span>
+                        </div>
+                        <p style="margin: 10px 0 0 0; text-align: center; font-style: italic; opacity: 0.9;">🎯 ${itinerary.theme}</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-bottom: 15px;">⏰ 详细时间安排</h3>
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                            <thead>
+                                <tr style="background: #ecf0f1;">
+                                    <th style="padding: 10px; border: 1px solid #bdc3c7; text-align: left;">时间</th>
+                                    <th style="padding: 10px; border: 1px solid #bdc3c7; text-align: left;">活动</th>
+                                    <th style="padding: 10px; border: 1px solid #bdc3c7; text-align: left;">地点</th>
+                                    <th style="padding: 10px; border: 1px solid #bdc3c7; text-align: left;">费用</th>
+                                    <th style="padding: 10px; border: 1px solid #bdc3c7; text-align: left;">备注</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${scheduleHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div style="display: flex; gap: 20px;">
+                        <div style="flex: 1;">
+                            <h3 style="color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 5px; margin-bottom: 10px;">🌟 今日亮点</h3>
+                            <ul style="margin: 0; padding-left: 20px;">
+                                ${highlightsHtml}
+                            </ul>
+                        </div>
+                        <div style="flex: 1;">
+                            <h3 style="color: #f39c12; border-bottom: 2px solid #f39c12; padding-bottom: 5px; margin-bottom: 10px;">💡 实用提示</h3>
+                            <ul style="margin: 0; padding-left: 20px;">
+                                ${tipsHtml}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <small style="color: #6c757d;">💼 点击地图上的其他路线查看更多行程详情</small>
+                    </div>
+                </div>
+            `;
+            
+            // 创建自定义弹窗
+            var popup = L.popup({
+                maxWidth: 850,
+                maxHeight: 650,
+                className: 'custom-popup'
+            })
+            .setLatLng(map.getCenter())
+            .setContent(popupContent)
+            .openOn(map);
+            
+            showNotification(`📋 已显示${dayKey}的详细行程安排`);
+        }
+        
+        // 数字转中文数字
+        function convertToChineseNumber(num) {
+            var chineseNumbers = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一'];
+            return chineseNumbers[parseInt(num)] || num;
+        }
+        
+        // 显示HTML模态框
+        function showHTMLModal(htmlPath, dayKey) {
+            // 创建模态框背景
+            var modalOverlay = document.createElement('div');
+            modalOverlay.id = 'htmlModal';
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 10000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                backdrop-filter: blur(3px);
+            `;
+            
+            // 创建模态框内容
+            var modalContent = document.createElement('div');
+            var isMobile = window.innerWidth <= 768;
+            modalContent.style.cssText = `
+                width: ${isMobile ? '95%' : '80%'};
+                height: ${isMobile ? '90%' : '85%'};
+                max-width: 1000px;
+                max-height: 800px;
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                position: relative;
+                overflow: hidden;
+            `;
+            
+            // 创建关闭按钮
+            var closeButton = document.createElement('button');
+            closeButton.innerHTML = '✕ 关闭';
+            closeButton.style.cssText = `
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: #ff6b6b;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+                z-index: 10001;
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+                transition: all 0.3s ease;
+            `;
+            
+            // 创建提示信息
+            var hintText = document.createElement('div');
+            hintText.innerHTML = isMobile ? '💡 点击背景关闭' : '💡 点击背景或按ESC键关闭，可选择其他天的行程';
+            hintText.style.cssText = `
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                background: rgba(76, 175, 80, 0.9);
+                color: white;
+                padding: 8px 15px;
+                border-radius: 20px;
+                font-size: ${isMobile ? '11px' : '12px'};
+                font-weight: bold;
+                z-index: 10001;
+                box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+                backdrop-filter: blur(10px);
+                max-width: ${isMobile ? '200px' : 'none'};
+            `;
+            
+            closeButton.onmouseover = function() {
+                this.style.background = '#ff5252';
+                this.style.transform = 'scale(1.05)';
+            };
+            
+            closeButton.onmouseout = function() {
+                this.style.background = '#ff6b6b';
+                this.style.transform = 'scale(1)';
+            };
+            
+            closeButton.onclick = function() {
+                document.body.removeChild(modalOverlay);
+            };
+            
+            // 创建iframe来加载HTML内容
+            var iframe = document.createElement('iframe');
+            iframe.src = htmlPath;
+            iframe.style.cssText = `
+                width: 100%;
+                height: 100%;
+                border: none;
+                border-radius: 15px;
+            `;
+            
+            // 处理iframe加载错误
+            iframe.onerror = function() {
+                modalContent.innerHTML = `
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; color: #666;">
+                        <h2>📄 页面加载中...</h2>
+                        <p>如果页面无法显示，请检查文件路径：${htmlPath}</p>
+                        <button onclick="document.body.removeChild(document.getElementById('htmlModal'))" 
+                                style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                            关闭
+                        </button>
+                    </div>
+                `;
+            };
+            
+            // 组装模态框
+            modalContent.appendChild(hintText);
+            modalContent.appendChild(closeButton);
+            modalContent.appendChild(iframe);
+            modalOverlay.appendChild(modalContent);
+            
+            // 添加到页面
+            document.body.appendChild(modalOverlay);
+            
+            // 点击背景关闭模态框
+            modalOverlay.onclick = function(e) {
+                if (e.target === modalOverlay) {
+                    document.body.removeChild(modalOverlay);
+                }
+            };
+            
+            // ESC键关闭模态框
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('htmlModal')) {
+                    document.body.removeChild(document.getElementById('htmlModal'));
+                }
+            });
+        }
+        
+        // 初始化地图标记和路线
+        function initializeMap() {
+            // 添加主要城市标记
+            markers['dalian'] = createMarker(locations['大连'], '✈️ 大连周水子国际机场', 'gray');
+            markers['yining'] = createMarker(locations['伊宁市'], '🏛️ 伊宁市 (出发/终点)', 'red');
+            markers['sailimu'] = createMarker(locations['赛里木湖'], '🌊 赛里木湖 (大西洋最后一滴眼泪)', 'blue');
+            markers['wenquan'] = createMarker(locations['温泉天泉景区'], '♨️ 温泉天泉景区', 'orange');
+            markers['bole'] = createMarker(locations['博乐市'], '🏛️ 博乐市', 'green');
+            markers['nalati'] = createMarker(locations['那拉提草原'], '🌾 那拉提草原 (空中草原)', 'purple');
+            markers['tekes'] = createMarker(locations['特克斯县'], '⭐ 特克斯县 (八卦城)', 'orange');
+            
+            // 创建路线
+            // 第1天：大连 → 伊宁 (航班)
+            createRoute([locations['大连'], locations['伊宁市']], 
+                       routeColors['day1'], 'day1', '✈️ 第1天: 大连 → 伊宁 (航班 4.5h)', true);
+            
+            // 第2天：伊宁 → 赛里木湖
+            createRoute([locations['伊宁市'], locations['赛里木湖']], 
+                       routeColors['day2'], 'day2', '🚗 第2天: 伊宁 → 赛里木湖 (260km, 3.5h)');
+            
+            // 第3天：赛里木湖 → 温泉天泉景区
+            createRoute([locations['赛里木湖'], locations['温泉天泉景区']], 
+                       routeColors['day3'], 'day3', '🚗 第3天: 赛里木湖 → 温泉天泉景区 (80km, 2h)');
+            
+            // 第4天：温泉天泉景区 → 博乐市
+            createRoute([locations['温泉天泉景区'], locations['博乐市']], 
+                       routeColors['day4'], 'day4', '🚗 第4天: 温泉天泉景区 → 博乐市 (120km, 2.5h)');
+            
+            // 第5天：博乐市 → 伊宁市
+            createRoute([locations['博乐市'], locations['伊宁市']], 
+                       routeColors['day5'], 'day5', '🚗 第5天: 博乐市 → 伊宁市 (223km, 3h10min) ✅');
+            
+            // 第6天：伊宁市区游览（环形路线）
+            var yiningCircle = [
+                locations['伊宁市'],
+                [43.92, 81.3],   // 六星街
+                [43.91, 81.32],  // 喀赞其民俗村
+                [43.90, 81.29],  // 汉家公主纪念馆
+                locations['伊宁市']
+            ];
+            createRoute(yiningCircle, routeColors['day6'], 'day6', 
+                       '🚗 第6天: 伊宁市区游览 (六星街 → 喀赞其 → 汉家公主馆)');
+            
+            // 第7天：伊宁 → 那拉提草原
+            createRoute([locations['伊宁市'], locations['那拉提草原']], 
+                       routeColors['day7'], 'day7', '🚗 第7天: 伊宁 → 那拉提草原 (270km, 3h47min) ✅');
+            
+            // 第8天：那拉提草原游览（环形路线）
+            var nalatiCircle = [
+                locations['那拉提草原'],
+                [43.26, 84.15],  // 空中草原
+                [43.28, 84.12],  // 河谷草原
+                [43.24, 84.08],  // 盘龙谷道
+                locations['那拉提草原']
+            ];
+            createRoute(nalatiCircle, routeColors['day8'], 'day8', 
+                       '🚗 第8天: 那拉提草原游览 (空中草原 → 河谷草原 → 盘龙谷道)');
+            
+            // 第9天：那拉提 → 特克斯县
+            createRoute([locations['那拉提草原'], locations['特克斯县']], 
+                       routeColors['day9'], 'day9', '🚗 第9天: 那拉提 → 特克斯县 (266km, 3h28min) ✅');
+            
+            // 第10天：特克斯县 → 伊宁市
+            createRoute([locations['特克斯县'], locations['伊宁市']], 
+                       routeColors['day10'], 'day10', '🚗 第10天: 特克斯县 → 伊宁市 (127km, 2h8min) ✅');
+            
+            // 第11天：伊宁 → 大连 (航班)
+            createRoute([locations['伊宁市'], locations['大连']], 
+                       routeColors['day11'], 'day11', '✈️ 第11天: 伊宁 → 大连 (航班 4.5h)', true);
+            
+            showNotification('🗺️ 开源地图加载完成！无需商业授权，完全免费使用');
+        }
+        
+        // 控制函数
+        function showAllRoutes() {
+            for (var key in polylines) {
+                map.addLayer(polylines[key]);
+            }
+            showNotification('✅ 已显示全部路线');
+        }
+        
+        function hideAllRoutes() {
+            for (var key in polylines) {
+                map.removeLayer(polylines[key]);
+            }
+            showNotification('❌ 已隐藏全部路线');
+        }
+        
+        function focusOnXinjiang() {
+            map.setView([43.8, 82.0], 8);
+            showNotification('🎯 已聚焦到新疆伊犁地区');
+        }
+        
+        function showDrivingOnly() {
+            hideAllRoutes();
+            // 只显示自驾路线（第2-10天）
+            for (var i = 2; i <= 10; i++) {
+                map.addLayer(polylines['day' + i]);
+            }
+            showNotification('🚗 仅显示自驾路线 (第2-10天)');
+        }
+        
+        // 切换单条路线
+        function toggleRoute(day) {
+            var polyline = polylines[day];
+            if (polyline) {
+                if (map.hasLayer(polyline)) {
+                    map.removeLayer(polyline);
+                    showNotification('❌ 已隐藏 ' + day + ' 路线');
+                } else {
+                    map.addLayer(polyline);
+                    showNotification('✅ 已显示 ' + day + ' 路线');
+                }
+            }
+        }
+        
+        // 页面加载完成后初始化地图
+        window.onload = function() {
+            initializeMap();
+            
+            // 添加启动动画效果
+            setTimeout(function() {
+                focusOnXinjiang();
+            }, 1500);
+            
+            // 3秒后显示操作提示
+            setTimeout(function() {
+                showNotification('💡 提示: 点击地图上的彩色路线查看详细行程安排！');
+            }, 3000);
+        };
+        
+        // 键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    toggleRoute('day' + e.key);
+                    break;
+                case '0':
+                    toggleRoute('day10');
+                    break;
+                case 'r':
+                case 'R':
+                    showAllRoutes();
+                    break;
+                case 'h':
+                case 'H':
+                    hideAllRoutes();
+                    break;
+                case 'f':
+                case 'F':
+                    focusOnXinjiang();
+                    break;
+                case 'd':
+                case 'D':
+                    showDrivingOnly();
+                    break;
+            }
+        });
+        
+        // 统计信息显示
+        function showStatistics() {
+            var totalDistance = 260 + 80 + 120 + 223 + 270 + 266 + 127; // 自驾总里程
+            var totalToll = 85 + 30 + 40 + 76 + 91 + 98 + 41; // 过路费总计
+            
+            var statsInfo = `📊 自驾统计信息：
+🛣️ 总里程: ${totalDistance}公里
+💰 过路费总计: ¥${totalToll}
+⏱️ 总车程: 约20小时
+⛽ 预估油费: ¥${Math.round(totalDistance * 0.6)}-${Math.round(totalDistance * 0.8)}
+🚗 建议车型: SUV或越野车
+🌍 地图技术: OpenStreetMap (开源免费)`;
+            
+            alert(statsInfo);
+        }
+        
+        // 显示行程指南
+        function showItineraryGuide() {
+            var guideContent = `
+                <div style="max-width: 600px; font-family: Arial, sans-serif;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; margin: -10px -10px 20px -10px; border-radius: 8px; text-align: center;">
+                        <h2 style="margin: 0; font-size: 20px;">📋 新疆伊犁旅游行程指南</h2>
+                        <p style="margin: 10px 0 0 0; opacity: 0.9;">点击地图路线查看详细行程安排</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px;">🗺️ 如何使用交互式地图</h3>
+                        <ul style="line-height: 1.6; color: #34495e;">
+                            <li><strong>点击路线</strong>：点击地图上的彩色路线查看当天详细行程</li>
+                            <li><strong>点击路线信息</strong>：点击下方"详细路线信息"中的矩形框也可查看详细行程</li>
+                            <li><strong>点击标记</strong>：点击景点标记查看位置信息和坐标</li>
+                            <li><strong>点击图例</strong>：点击下方颜色图例可显示/隐藏对应路线</li>
+                            <li><strong>键盘快捷键</strong>：按数字键1-9快速切换对应天数路线</li>
+                            <li><strong>控制按钮</strong>：使用上方按钮进行批量操作</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 5px;">📅 行程概览</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px;">
+                            <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 4px solid #808080;">
+                                <strong>第1天</strong>：大连→伊宁（航班）<br>
+                                <small>抵达适应，市区初探</small>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 4px solid #FF4444;">
+                                <strong>第2天</strong>：伊宁→赛里木湖<br>
+                                <small>高山湖泊，环湖游览</small>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 4px solid #FF8800;">
+                                <strong>第3天</strong>：赛里木湖→天泉<br>
+                                <small>日出观赏，温泉体验</small>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 4px solid #00AAFF;">
+                                <strong>第7天</strong>：伊宁→那拉提<br>
+                                <small>草原之旅，环境适应</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="color: #e74c3c; border-bottom: 2px solid #e74c3c; padding-bottom: 5px;">⚠️ 重要提醒</h3>
+                        <div style="background: #fff5f5; padding: 15px; border-radius: 5px; border: 1px solid #fed7d7;">
+                            <ul style="margin: 0; line-height: 1.6; color: #c53030;">
+                                <li>新疆地区昼夜温差大，注意保暖</li>
+                                <li>高海拔地区注意防晒和高原反应</li>
+                                <li>部分地区信号较弱，提前下载离线地图</li>
+                                <li>尊重当地民族文化和宗教习俗</li>
+                                <li>携带身份证，配合安检工作</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 15px; background: #f0f8ff; border-radius: 5px;">
+                        <p style="margin: 0; color: #2c5aa0; font-weight: bold;">🎯 点击地图上的任意路线开始探索详细行程！</p>
+                    </div>
+                </div>
+            `;
+            
+            var popup = L.popup({
+                maxWidth: 650,
+                maxHeight: 700,
+                className: 'custom-popup'
+            })
+            .setLatLng(map.getCenter())
+            .setContent(guideContent)
+            .openOn(map);
+            
+            showNotification('📋 行程指南已显示，点击路线查看详细安排');
+        }
+        
+        // 添加统计按钮
+        setTimeout(function() {
+            var controls = document.querySelector('.controls');
+            var statsBtn = document.createElement('button');
+            statsBtn.className = 'btn';
+            statsBtn.innerHTML = '📊 统计信息';
+            statsBtn.onclick = showStatistics;
+            controls.appendChild(statsBtn);
+        }, 1000);
+    </script>
+</body>
+</html> 

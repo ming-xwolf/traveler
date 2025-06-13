@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  travel-plan:
+    image: nginx:alpine
+    container_name: travel-plan
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.travel-plan.rule=Host(`travel-plan.local`)"
+      - "traefik.http.services.travel-plan.loadbalancer.server.port=80"
+
+networks:
+  default:
+    name: travel-network 

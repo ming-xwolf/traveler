@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新疆伊犁旅游概览 - 11天深度游攻略</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .meta {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin: 20px 0 10px 0;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-table th,
+        .info-table td {
+            padding: 12px 18px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .schedule-table th {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 12px;
+            font-weight: 600;
+        }
+
+        .schedule-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .schedule-table a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 15px;
+            background: rgba(52, 152, 219, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .schedule-table a:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .highlight-item {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .highlight-item h4 {
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .mermaid-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .budget-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 20px 0;
+            align-items: start;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .note-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .route-info {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .route-info h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .route-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .distance-highlight {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .time-highlight {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .toll-highlight {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .budget-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏔️ 新疆伊犁旅游概览</h1>
+            <div class="meta">
+                <p><strong>📋 项目说明</strong>：此文件是新疆伊犁深度游旅行攻略的总览文件</p>
+                <p><strong>🗓️ 创建时间</strong>：2025年6月25日 | <strong>⏱️ 最后更新</strong>：2025年12月19日</p>
+                <p><strong>👤 制作人</strong>：Cursor 旅行导游助手</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>📊 基本信息</h2>
+            <table class="info-table">
+                <tr>
+                    <th>项目</th>
+                    <th>详情</th>
+                </tr>
+                <tr>
+                    <td>🗓️ <strong>起始日期</strong></td>
+                    <td>2025年6月27日</td>
+                </tr>
+                <tr>
+                    <td>⏱️ <strong>总天数</strong></td>
+                    <td>11天10夜</td>
+                </tr>
+                <tr>
+                    <td>👥 <strong>旅行人数</strong></td>
+                    <td>6人团队</td>
+                </tr>
+                <tr>
+                    <td>💰 <strong>预算范围</strong></td>
+                    <td>¥8,500 - ¥13,500/人（不含往返机票）</td>
+                </tr>
+                <tr>
+                    <td>🌤️ <strong>最佳旅行季节</strong></td>
+                    <td>6月-8月（夏季草原花海盛开）</td>
+                </tr>
+                <tr>
+                    <td>🚗 <strong>交通方式</strong></td>
+                    <td>飞机+自驾租车（2辆SUV）</td>
+                </tr>
+                <tr>
+                    <td>🏔️ <strong>地理特色</strong></td>
+                    <td>天山北麓，伊犁河谷，海拔500-3000米</td>
+                </tr>
+                <tr>
+                    <td>🌡️ <strong>气候特点</strong></td>
+                    <td>温带大陆性气候，昼夜温差大</td>
+                </tr>
+            </table>
+
+            <h2>📅 行程概述</h2>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    gantt
+                        title 新疆伊犁旅行时间线
+                        dateFormat  YYYY-MM-DD
+                        section 抵达与适应
+                        抵达伊宁市        :2025-06-27, 1d
+                        section 赛里木湖之旅
+                        赛里木湖游览      :2025-06-28, 1d
+                        section 温泉体验
+                        天泉景区温泉体验  :2025-06-29, 1d
+                        section 博乐中转
+                        博乐市区游览      :2025-06-30, 1d
+                        section 伊犁深度游
+                        伊宁市区体验      :2025-07-01, 2d
+                        section 草原文化
+                        那拉提草原体验    :2025-07-03, 2d
+                        section 八卦城探秘
+                        特克斯文化体验    :2025-07-05, 1d
+                        section 购物返程
+                        伊宁购物返程      :2025-07-06, 2d
+                </div>
+            </div>
+
+            <h3>✨ 行程亮点</h3>
+            <div class="highlights">
+                <div class="highlight-item">
+                    <h4>🏔️ 高山湖泊</h4>
+                    <p>赛里木湖"大西洋最后一滴眼泪"，180°湖景体验</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>🌡️ 温泉养生</h4>
+                    <p>鄂托克塞尔天泉景区温泉，放松身心</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>🌸 花海盛宴</h4>
+                    <p>伊犁河谷薰衣草和野花海（6月最佳观赏期）</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>🏕️ 草原文化</h4>
+                    <p>那拉提空中草原，体验哈萨克族牧民生活</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>🍯 美食探索</h4>
+                    <p>新疆特色美食和伊犁本地菜系</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>🏛️ 丝路文化</h4>
+                    <p>感受古丝绸之路的历史韵味</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>🎯 八卦城奇观</h4>
+                    <p>世界最大八卦城特克斯的神秘布局</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>🛍️ 特产购物</h4>
+                    <p>新疆干果、薰衣草制品、民族工艺品</p>
+                </div>
+            </div>
+
+            <h2>📝 每日行程链接表</h2>
+            <table class="schedule-table">
+                <tr>
+                    <th>日期</th>
+                    <th>主要行程</th>
+                    <th>住宿地</th>
+                    <th>详细文件</th>
+                </tr>
+                <tr>
+                    <td>第1天 (6月27日)</td>
+                    <td>大连→伊宁，机场取车，市区休整</td>
+                    <td>喆啡酒店</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-06-27-第一天.md">📅 第一天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第2天 (6月28日)</td>
+                    <td>伊宁→赛里木湖，环湖游览</td>
+                    <td>栖迟静海营地</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-06-28-第二天.md">📅 第二天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第3天 (6月29日)</td>
+                    <td>赛里木湖→天泉景区，温泉体验</td>
+                    <td>天泉酒店</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-06-29-第三天.md">📅 第三天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第4天 (6月30日)</td>
+                    <td>天泉景区→博乐市，市区游览</td>
+                    <td>博乐市酒店</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-06-30-第四天.md">📅 第四天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第5天 (7月1日)</td>
+                    <td>博乐→伊宁，返回伊犁河谷</td>
+                    <td>喆啡酒店</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-07-01-第五天.md">📅 第五天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第6天 (7月2日)</td>
+                    <td>伊宁市区深度游，休整放松</td>
+                    <td>喆啡酒店</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-07-02-第六天.md">📅 第六天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第7天 (7月3日)</td>
+                    <td>伊宁→那拉提草原，空中草原体验</td>
+                    <td>那拉提璞玥酒店</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-07-03-第七天.md">📅 第七天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第8天 (7月4日)</td>
+                    <td>那拉提草原深度游，牧民文化</td>
+                    <td>那拉提璞玥酒店</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-07-04-第八天.md">📅 第八天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第9天 (7月5日)</td>
+                    <td>那拉提→特克斯八卦城，探秘之旅</td>
+                    <td>全季酒店太极坛店</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-07-05-第九天.md">📅 第九天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第10天 (7月6日)</td>
+                    <td>特克斯→伊宁，市区购物休闲</td>
+                    <td>伊犁宾馆</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-07-06-第十天.md">📅 第十天详细行程</a></td>
+                </tr>
+                <tr>
+                    <td>第11天 (7月7日)</td>
+                    <td>伊宁→大连，还车返程</td>
+                    <td>飞机上</td>
+                    <td><a href="./新疆伊犁旅游攻略/2025-07-07-第十一天.md">📅 第十一天详细行程</a></td>
+                </tr>
+            </table>
+
+            <h2>🗺️ 实际路线距离与时间（基于百度地图数据）</h2>
+            
+            <div class="route-info">
+                <h4>🚗 伊宁市 → 那拉提草原</h4>
+                <p><span class="distance-highlight">距离：269.8公里</span> | <span class="time-highlight">车程：3小时47分钟</span> | <span class="toll-highlight">过路费：¥91</span></p>
+                <p>路线：伊宁市区 → 伊墩高速 → 墩那高速 → 那拉提出口 → 草原景区</p>
+            </div>
+
+            <div class="route-info">
+                <h4>🚗 那拉提草原 → 特克斯县</h4>
+                <p><span class="distance-highlight">距离：266.1公里</span> | <span class="time-highlight">车程：3小时28分钟</span> | <span class="toll-highlight">过路费：¥98</span></p>
+                <p>路线：那拉提景区 → 墩那高速 → G577国道 → 特克斯县城</p>
+            </div>
+
+            <h2>🏨 住宿安排详情（6人团队配置）</h2>
+            <table class="info-table">
+                <tr>
+                    <th>住宿名称</th>
+                    <th>入住天数</th>
+                    <th>房间配置</th>
+                    <th>特色亮点</th>
+                    <th>单间价格</th>
+                    <th>团队总价</th>
+                </tr>
+                <tr>
+                    <td><strong>伊宁喆啡酒店</strong></td>
+                    <td>4晚</td>
+                    <td>3间标准间</td>
+                    <td>北欧简约风格，智能设施，商业区中心</td>
+                    <td>¥298/间</td>
+                    <td>¥3,576</td>
+                </tr>
+                <tr>
+                    <td><strong>赛里木湖栖迟静海营地</strong></td>
+                    <td>1晚</td>
+                    <td>3间湖景房</td>
+                    <td>湖边木屋，180°湖景，观星胜地</td>
+                    <td>¥350/间</td>
+                    <td>¥1,050</td>
+                </tr>
+                <tr>
+                    <td><strong>天泉国际温泉酒店</strong></td>
+                    <td>1晚</td>
+                    <td>3间标准间</td>
+                    <td>天然温泉，养生度假，山景房</td>
+                    <td>¥280/间</td>
+                    <td>¥840</td>
+                </tr>
+                <tr>
+                    <td><strong>博乐金橡瑞家酒店</strong></td>
+                    <td>1晚</td>
+                    <td>3间高级房</td>
+                    <td>四星商务，金橡大厦，市中心</td>
+                    <td>¥350/间</td>
+                    <td>¥1,050</td>
+                </tr>
+                <tr>
+                    <td><strong>那拉提璞玥酒店</strong></td>
+                    <td>2晚</td>
+                    <td>3间草原景观房</td>
+                    <td>360°草原景观，奢华体验，观星服务</td>
+                    <td>¥450/间</td>
+                    <td>¥2,700</td>
+                </tr>
+                <tr>
+                    <td><strong>全季酒店特克斯太极坛店</strong></td>
+                    <td>1晚</td>
+                    <td>3间标准间</td>
+                    <td>八卦城中心，品牌连锁，太极广场旁</td>
+                    <td>¥330/间</td>
+                    <td>¥990</td>
+                </tr>
+                <tr>
+                    <td><strong>伊宁伊犁宾馆</strong></td>
+                    <td>1晚</td>
+                    <td>3间标准间</td>
+                    <td>四星商务，解放路168号，新疆风情装修</td>
+                    <td>¥458/间</td>
+                    <td>¥1,374</td>
+                </tr>
+                <tr style="background: #e8f5e8; font-weight: bold;">
+                    <td><strong>总计</strong></td>
+                    <td><strong>10晚</strong></td>
+                    <td><strong>3间房</strong></td>
+                    <td><strong>多样化住宿体验</strong></td>
+                    <td><strong>平均¥379/间</strong></td>
+                    <td><strong>¥11,580</strong></td>
+                </tr>
+            </table>
+
+            <h2>💰 预算概览（6人团队版）</h2>
+            <div class="budget-section">
+                <div class="mermaid-container">
+                    <div class="mermaid">
+                        pie title 人均预算分配（¥11,000标准）
+                            "住宿费用(30%)" : 30
+                            "交通费用(22%)" : 22
+                            "餐饮费用(25%)" : 25
+                            "景点门票(15%)" : 15
+                            "购物娱乐(8%)" : 8
+                    </div>
+                </div>
+
+                <table class="info-table">
+                    <tr>
+                        <th>费用类别</th>
+                        <th>总费用</th>
+                        <th>人均费用</th>
+                        <th>备注说明</th>
+                    </tr>
+                    <tr>
+                        <td>🚗 <strong>交通费用</strong></td>
+                        <td>¥13,200-16,800</td>
+                        <td>¥2,200-2,800</td>
+                        <td>11天租车，平均分摊</td>
+                    </tr>
+                    <tr>
+                        <td>🏨 <strong>住宿费用</strong></td>
+                        <td>¥11,580-14,500</td>
+                        <td>¥1,930-2,417</td>
+                        <td>标准间为主，3间房</td>
+                    </tr>
+                    <tr>
+                        <td>🍽️ <strong>餐饮费用</strong></td>
+                        <td>¥16,200-21,600</td>
+                        <td>¥2,700-3,600</td>
+                        <td>包含特色餐厅和团餐</td>
+                    </tr>
+                    <tr>
+                        <td>🎫 <strong>景点门票</strong></td>
+                        <td>¥9,000-12,600</td>
+                        <td>¥1,500-2,100</td>
+                        <td>含温泉、骑马、观光车等</td>
+                    </tr>
+                    <tr>
+                        <td>🛍️ <strong>购物娱乐</strong></td>
+                        <td>¥3,000-6,000</td>
+                        <td>¥500-1,000</td>
+                        <td>薰衣草制品、干果等</td>
+                    </tr>
+                    <tr>
+                        <td>💰 <strong>其他费用</strong></td>
+                        <td>¥3,000-4,200</td>
+                        <td>¥500-700</td>
+                        <td>含旅游保险、应急费用</td>
+                    </tr>
+                    <tr style="background: #fff3cd; font-weight: bold;">
+                        <td><strong>🎯 总计</strong></td>
+                        <td><strong>¥55,980-75,700</strong></td>
+                        <td><strong>¥9,330-12,617</strong></td>
+                        <td><strong>不含往返机票</strong></td>
+                    </tr>
+                </table>
+            </div>
+
+            <h2>🍽️ 美食文化体验（6人团队推荐）</h2>
+            <table class="info-table">
+                <tr>
+                    <th>美食分类</th>
+                    <th>代表菜品</th>
+                    <th>推荐餐厅</th>
+                    <th>人均价格</th>
+                    <th>团队总价</th>
+                    <th>团队优惠</th>
+                </tr>
+                <tr>
+                    <td><strong>新疆经典</strong></td>
+                    <td>手抓饭、大盘鸡、烤羊肉串</td>
+                    <td>伊犁风情园</td>
+                    <td>¥120/人</td>
+                    <td>¥720</td>
+                    <td>6人用餐可享9折优惠</td>
+                </tr>
+                <tr>
+                    <td><strong>哈萨克美食</strong></td>
+                    <td>熏马肠、马奶酒、手抓肉</td>
+                    <td>草原人家</td>
+                    <td>¥150/人</td>
+                    <td>¥900</td>
+                    <td>免费赠送马奶茶</td>
+                </tr>
+                <tr>
+                    <td><strong>伊犁特色</strong></td>
+                    <td>薰衣草蜂蜜、伊犁苹果、野蘑菇</td>
+                    <td>璞玥酒店餐厅</td>
+                    <td>¥200/人</td>
+                    <td>¥1,200</td>
+                    <td>团队预订享优先包房</td>
+                </tr>
+                <tr>
+                    <td><strong>湖鲜美味</strong></td>
+                    <td>赛里木湖冷水鱼、湖虾</td>
+                    <td>湖边餐厅</td>
+                    <td>¥160/人</td>
+                    <td>¥960</td>
+                    <td>团队用餐免包房费</td>
+                </tr>
+                <tr>
+                    <td><strong>温泉药膳</strong></td>
+                    <td>天山雪莲汤、虫草炖羊肉</td>
+                    <td>天泉酒店</td>
+                    <td>¥250/人</td>
+                    <td>¥1,500</td>
+                    <td>住店客人享8.5折</td>
+                </tr>
+                <tr style="background: #f8f9fa; font-weight: bold;">
+                    <td><strong>合计</strong></td>
+                    <td><strong>5大特色体验</strong></td>
+                    <td><strong>精选餐厅</strong></td>
+                    <td><strong>¥176/人</strong></td>
+                    <td><strong>¥5,280</strong></td>
+                    <td><strong>团队专享优惠</strong></td>
+                </tr>
+            </table>
+
+            <h2>🌈 特色体验推荐</h2>
+            
+            <h3>🌸 最佳观赏时节</h3>
+            <table class="info-table">
+                <tr>
+                    <th>景观类型</th>
+                    <th>最佳时间</th>
+                    <th>观赏地点</th>
+                    <th>特色描述</th>
+                </tr>
+                <tr>
+                    <td><strong>薰衣草花海</strong></td>
+                    <td>6月下旬-7月上旬</td>
+                    <td>伊犁河谷各地</td>
+                    <td>紫色海洋，香气怡人</td>
+                </tr>
+                <tr>
+                    <td><strong>野花草原</strong></td>
+                    <td>6月-7月</td>
+                    <td>那拉提、喀拉峻</td>
+                    <td>五彩斑斓，层次丰富</td>
+                </tr>
+                <tr>
+                    <td><strong>雪山倒影</strong></td>
+                    <td>全年（夏季最佳）</td>
+                    <td>赛里木湖</td>
+                    <td>天山雪峰镜像</td>
+                </tr>
+                <tr>
+                    <td><strong>草原日出</strong></td>
+                    <td>5月-9月</td>
+                    <td>那拉提空中草原</td>
+                    <td>金色草原，震撼美景</td>
+                </tr>
+                <tr>
+                    <td><strong>湖泊日落</strong></td>
+                    <td>全年</td>
+                    <td>赛里木湖西岸</td>
+                    <td>夕阳西下，湖光山色</td>
+                </tr>
+            </table>
+
+            <div class="note-section">
+                <h3>⚠️ 重要注意事项</h3>
+                <h4>📋 出行准备清单</h4>
+                <ul>
+                    <li><strong>证件类</strong>：身份证、驾驶证、行驶证</li>
+                    <li><strong>预订确认</strong>：机票、酒店、租车确认单</li>
+                    <li><strong>保险类</strong>：旅游保险、车辆保险</li>
+                    <li><strong>健康类</strong>：个人常用药品、防晒用品</li>
+                    <li><strong>电子设备</strong>：充电器、移动电源、相机设备</li>
+                    <li><strong>现金支付</strong>：备用现金（部分地区网络不稳定）</li>
+                </ul>
+                
+                <h4>🌡️ 着装建议</h4>
+                <p><strong>白天</strong>（20-28°C）：T恤+薄外套+防晒帽 | <strong>夜晚</strong>（5-15°C）：长袖+厚外套/轻羽绒</p>
+                <p><strong>高海拔</strong>（0-20°C）：冲锋衣+保暖层 | <strong>温泉</strong>（水温42°C）：泳衣+浴袍</p>
+            </div>
+
+            <div class="contact-section">
+                <h3>📱 数字化便民服务</h3>
+                <h4>必备APP下载</h4>
+                <p><strong>地图导航</strong>：高德地图（离线版）| <strong>天气预报</strong>：中国天气 | <strong>翻译工具</strong>：有道翻译官</p>
+                <p><strong>美食推荐</strong>：大众点评 | <strong>住宿预订</strong>：携程旅行 | <strong>支付工具</strong>：支付宝+微信</p>
+                
+                <h4>📞 重要联系方式</h4>
+                <p><strong>旅游咨询</strong>：0999-8139777 | <strong>紧急救援</strong>：110/120/119 | <strong>道路救援</strong>：12122</p>
+                <p><strong>天气查询</strong>：12121 | <strong>租车服务</strong>：4008-123-123</p>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <h3>🎊 温馨提示</h3>
+            <p>伊犁地区日照时间长（夏季日落约21:30），请合理安排作息时间。6月正值花海盛开季节，是一年中最美的时候。</p>
+            <p>这次旅行将带您深度体验新疆伊犁的自然风光、民族文化和美食特色，留下一生难忘的美好回忆。</p>
+            <p><strong>安全提醒</strong>：请随时关注天气变化，遵守当地法律法规，尊重民族习俗，保护生态环境，做一个文明的旅行者。</p>
+            
+            <p style="margin-top: 20px;"><strong>最后更新时间</strong>：2025年12月19日</p>
+            <p><strong>制作人</strong>：您的专属旅行导游 Cursor 🧳✈️</p>
+            <p><em>祝您在新疆伊犁度过一段精彩难忘的旅程！</em> 🌸🏔️🎉</p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#4facfe',
+                primaryTextColor: '#2c3e50',
+                primaryBorderColor: '#3498db',
+                lineColor: '#34495e',
+                sectionBkgColor: '#ecf0f1',
+                altSectionBkgColor: '#bdc3c7',
+                gridColor: '#95a5a6',
+                tertiaryColor: '#f8f9fa'
+            }
+        });
+    </script>
+</body>
+</html>
