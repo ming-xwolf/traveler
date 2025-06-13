@@ -310,35 +310,7 @@
             margin-top: 30px;
         }
         
-        .close-btn {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
-            transition: all 0.3s ease;
-            z-index: 10001;
-            min-width: 60px;
-            text-align: center;
-            line-height: 1.2;
-        }
-        
-        .close-btn:hover {
-            background: #ff5252;
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
-        }
-        
-        .close-btn:active {
-            transform: scale(0.95);
-        }
+
         
         @media (max-width: 768px) {
             .container {
@@ -363,18 +335,10 @@
                 padding: 10px 5px;
             }
             
-            .close-btn {
-                top: 10px;
-                right: 10px;
-                padding: 6px 12px;
-                font-size: 12px;
-                min-width: 50px;
-            }
         }
     </style>
 </head>
 <body>
-    <button class="close-btn" onclick="closeModal()">✕ 关闭</button>
     
     <div class="container">
         <div class="header">
@@ -730,13 +694,6 @@
     
     <script>
         // 关闭模态框函数
-        function closeModal() {
-            try {
-                if (window.parent && window.parent !== window) {
-                    var modalElement = window.parent.document.getElementById('htmlModal');
-                    if (modalElement) {
-                        window.parent.document.body.removeChild(modalElement);
-                    }
                 } else {
                     window.close();
                 }
@@ -749,7 +706,6 @@
         // 监听ESC键
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeModal();
             }
         });
         
