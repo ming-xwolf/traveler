@@ -1,0 +1,382 @@
+// 导入变量
+@use './variables.scss' as *;
+
+// 重置样式
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--el-text-color-primary);
+  background-color: var(--el-bg-color-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 通用工具类
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-base;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 0 $spacing-sm;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// 响应式工具类
+.hidden-xs {
+  @media (max-width: $breakpoint-xs) {
+    display: none !important;
+  }
+}
+
+.hidden-sm {
+  @media (max-width: $breakpoint-sm) {
+    display: none !important;
+  }
+}
+
+.hidden-md {
+  @media (max-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+// 间距工具类
+@for $i from 0 through 10 {
+  .mt-#{$i} { margin-top: $i * $spacing-xs; }
+  .mb-#{$i} { margin-bottom: $i * $spacing-xs; }
+  .ml-#{$i} { margin-left: $i * $spacing-xs; }
+  .mr-#{$i} { margin-right: $i * $spacing-xs; }
+  .mx-#{$i} { 
+    margin-left: $i * $spacing-xs;
+    margin-right: $i * $spacing-xs;
+  }
+  .my-#{$i} { 
+    margin-top: $i * $spacing-xs;
+    margin-bottom: $i * $spacing-xs;
+  }
+  .m-#{$i} { margin: $i * $spacing-xs; }
+
+  .pt-#{$i} { padding-top: $i * $spacing-xs; }
+  .pb-#{$i} { padding-bottom: $i * $spacing-xs; }
+  .pl-#{$i} { padding-left: $i * $spacing-xs; }
+  .pr-#{$i} { padding-right: $i * $spacing-xs; }
+  .px-#{$i} { 
+    padding-left: $i * $spacing-xs;
+    padding-right: $i * $spacing-xs;
+  }
+  .py-#{$i} { 
+    padding-top: $i * $spacing-xs;
+    padding-bottom: $i * $spacing-xs;
+  }
+  .p-#{$i} { padding: $i * $spacing-xs; }
+}
+
+// 弹性布局工具类
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+// 宽度工具类
+.w-full {
+  width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+@for $i from 1 through 12 {
+  .w-#{$i}-12 {
+    width: percentage($i / 12);
+  }
+}
+
+// 高度工具类
+.h-full {
+  height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+// 圆角工具类
+.rounded-sm {
+  border-radius: $border-radius-sm;
+}
+
+.rounded {
+  border-radius: $border-radius-base;
+}
+
+.rounded-lg {
+  border-radius: $border-radius-lg;
+}
+
+.rounded-xl {
+  border-radius: $border-radius-xl;
+}
+
+.rounded-full {
+  border-radius: 50%;
+}
+
+// 阴影工具类
+.shadow-sm {
+  box-shadow: $box-shadow-sm;
+}
+
+.shadow {
+  box-shadow: $box-shadow-base;
+}
+
+.shadow-lg {
+  box-shadow: $box-shadow-lg;
+}
+
+.shadow-xl {
+  box-shadow: $box-shadow-xl;
+}
+
+.shadow-none {
+  box-shadow: none;
+}
+
+// 过渡动画工具类
+.transition {
+  transition: $transition-base;
+}
+
+.transition-fast {
+  transition: $transition-fast;
+}
+
+.transition-slow {
+  transition: $transition-slow;
+}
+
+// 自定义滚动条
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--el-fill-color-light);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--el-border-color-darker);
+    border-radius: 4px;
+    
+    &:hover {
+      background: var(--el-border-color-dark);
+    }
+  }
+}
+
+// 加载动画
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// 淡入动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// 滑动动画
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-up-enter-from {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.slide-up-leave-to {
+  transform: translateY(-30px);
+  opacity: 0;
+}
+
+// 缩放动画
+.scale-enter-active,
+.scale-leave-active {
+  transition: all 0.3s ease;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+// 自定义按钮样式
+.btn-gradient {
+  background: $gradient-primary;
+  border: none;
+  color: white;
+  transition: $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $box-shadow-lg;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// 卡片样式
+.card {
+  background: var(--el-bg-color);
+  border-radius: $border-radius-lg;
+  box-shadow: $box-shadow-base;
+  border: 1px solid var(--el-border-color-light);
+  overflow: hidden;
+  transition: $transition-base;
+
+  &:hover {
+    box-shadow: $box-shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    padding: $spacing-lg;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    background: var(--el-fill-color-extra-light);
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-lg;
+      font-weight: 600;
+      color: var(--el-text-color-primary);
+    }
+  }
+
+  .card-body {
+    padding: $spacing-lg;
+  }
+
+  .card-footer {
+    padding: $spacing-base $spacing-lg;
+    border-top: 1px solid var(--el-border-color-lighter);
+    background: var(--el-fill-color-extra-light);
+  }
+}
+
+// 渐变文字
+.gradient-text {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+// 响应式媒体查询 Mixin
+@mixin mobile {
+  @media (max-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+} 
