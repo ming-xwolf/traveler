@@ -49,7 +49,7 @@ check_docker() {
 
 # 检查端口是否被占用
 check_port() {
-    local port=8080
+    local port=18088
     if lsof -Pi :$port -sTCP:LISTEN -t >/dev/null 2>&1; then
         print_warning "端口 $port 已被占用，请修改 docker-compose.yml 中的端口配置"
         read -p "是否继续？(y/N): " -n 1 -r
@@ -104,7 +104,7 @@ wait_for_service() {
     local attempt=1
     
     while [[ $attempt -le $max_attempts ]]; do
-        if curl -s http://localhost:8080/health >/dev/null 2>&1; then
+        if curl -s http://localhost:18088/health >/dev/null 2>&1; then
             print_message "服务已就绪！"
             return 0
         fi
@@ -124,8 +124,8 @@ show_access_info() {
     print_message "🎉 部署完成！"
     echo
     echo -e "${GREEN}访问地址:${NC}"
-    echo -e "  主地图页面: ${BLUE}http://localhost:8080${NC}"
-    echo -e "  健康检查:   ${BLUE}http://localhost:8080/health${NC}"
+    echo -e "  主地图页面: ${BLUE}http://localhost:18088${NC}"
+    echo -e "  健康检查:   ${BLUE}http://localhost:18088/health${NC}"
     echo
     echo -e "${GREEN}管理命令:${NC}"
     echo -e "  查看状态:   ${YELLOW}docker-compose -p travel-plan ps${NC}"
